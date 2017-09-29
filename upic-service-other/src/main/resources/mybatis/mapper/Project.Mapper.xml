@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.ProjectDao">
+
+	<!-- 用户信息表 -->
+	<sql id="project"> T_PROJECT </sql>
+	<resultMap id="beanMap" type="Project">
+		<id column="PROJECT_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="PROJECT" property="project" />
+		<result column="PROJECT_FIRST_ID" property="projectFirstId" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Project" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="project" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		PROJECT, PROJECT_FIRST_ID)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{project},#{projectFirstId})
+	</insert>
+
+	<update id="update" parameterType="Project">
+		update
+		<include refid="project" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			PROJECT=#{project},
+			PROJECT_FIRST_ID=#{projectFirstId}
+		</set>
+		<where>
+			PROJECT_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="project" />
+		where PROJECT_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="project" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by PROJECT_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="project" />
+		where PROJECT_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="project != null and project != ''"> and PROJECT
+			= #{project}
+		</if>
+		<if test="projectFirst != null and projectFirst != ''"> and PROJECT_FIRST_ID
+			= #{projectFirst}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="project" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by PROJECT_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="project" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

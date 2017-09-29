@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.BrowseRecordsDao">
+
+	<!-- 用户信息表 -->
+	<sql id="user"> T_BROWSE_RECORDS </sql>
+
+	<resultMap id="beanMap" type="BrowseRecords">
+		<id column="BROWSE_RECORDS_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="USER_NAME" property="userName" />
+		<result column="OPEN_ID" property="openId" />
+		<result column="USER_LOGO" property="userLogo" />
+		<result column="SHOP_NAME" property="shopName" />
+		<result column="STORE_NUMBER" property="storeNumber" />
+		<result column="SHOP_NUMBER" property="shopNumber" />
+		<result column="SHOP_TYPE" property="shopType" />
+		<result column="SHOP_THEME" property="shopTheme" />
+		<result column="SHOP_CLASS" property="shopClass" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+	</resultMap>
+
+	<insert id="insert" parameterType="BrowseRecords" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="user" />
+		(VERSION, CREATETIME,
+		USER_NAME,OPEN_ID ,USER_LOGO,
+		SHOP_NAME,SHOP_NUMBER,FIELD1,FIELD2,STORE_NUMBER,SHOP_TYPE,SHOP_THEME,SHOP_CLASS)
+		values (0,
+		NOW(),#{userName},#{openId},#{userLogo},#{shopName}
+		,#{shopNumber},#{field1},#{field2},#{storeNumber},#{shopType},#{shopTheme},#{shopClass})
+	</insert>
+
+	<update id="update" parameterType="BrowseRecords">
+		update
+		<include refid="user" />
+		<set>
+			VERSION = #{version}+1,
+			USER_NAME=#{username},
+			PASSWORD=#{password},
+			PHONE_NUM=#{phoneNum},
+			OPEN_ID=#{openId},
+			LAST_LOGIN_TIME=#{lastLoginTime},
+
+			NICK_NAME=#{nickName},
+			SEX=#{sex},
+			PROVINCE=#{province},
+			CITY=#{city},
+			COUNTRY=#{country},
+			HEADIMGURL=#{headImagUrl}
+		</set>
+		<where>
+			USER_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="user" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		where BROWSE_RECORDS_ID = #{id}
+	</select>
+
+	<select id="findByUserNo" parameterType="string" resultMap="beanMap">
+		select * from
+		<include refid="user" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="user" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by BROWSE_RECORDS_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="user" />
+		where BROWSE_RECORDS_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="openId != null and openId != ''"> and OPEN_ID= #{openId}</if>
+		<if test="shopClass != null and shopClass != ''"> and SHOP_CLASS= #{shopClass}</if>
+		<if test="shopName != null and shopName != ''"> and SHOP_NAME= #{shopName}</if>
+		<if test="storeNumber != null and storeNumber != ''"> and STORE_NUMBER= #{storeNumber}</if>
+		<if test="shopNumber != null and shopNumber != ''"> and SHOP_NUMBER= #{shopNumber}</if>
+		<if test="shopType != null and shopType != ''"> and SHOP_TYPE= #{shopType}</if>
+		<if test="shopTheme != null and shopTheme != ''"> and SHOP_THEME= #{shopTheme}</if>
+		<if test="orderDateBegin != null and orderDateBegin != '' ">
+			and CREATETIME <![CDATA[ >= ]]>
+			#{orderDateBegin,jdbcType=VARCHAR}
+		</if>
+		<if test="orderDateEnd != null and orderDateEnd != '' ">
+			and CREATETIME <![CDATA[ <= ]]>
+			#{orderDateEnd,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="user" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by BROWSE_RECORDS_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="user" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

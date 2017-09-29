@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.CommentDao">
+
+	<!-- 用户信息表 -->
+	<sql id="comment"> T_SHOP_COMMENT </sql>
+	<resultMap id="beanMap" type="Comment">
+		<id column="SHOP_COMMETNT_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="T_SHOP_ID" property="shopId" />
+		<result column="OPEENID" property="openId" />
+		<result column="PHONE_NUM" property="phoneNum" />
+		<result column="CONTENT" property="content" />
+		<result column="RANK" property="rank" />
+		<result column="NICK_NAME" property="nickName" />
+		<result column="PIC" property="pic" />
+		<result column="TITLE" property="title" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Comment" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="comment" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		T_SHOP_ID
+		,OPEENID,PHONE_NUM,CONTENT,RANK,NICK_NAME,PIC,TITLE)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{shopId},#{openId},#{phoneNum},#{content},#{rank},#{nickName},#{pic},#{title})
+	</insert>
+
+	<update id="update" parameterType="Comment">
+		update
+		<include refid="comment" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			T_SHOP_ID=#{shopId},
+			OPEENID=#{openId},
+			PHONE_NUM=#{phoneNum},
+			CONTENT=#{content},
+			RANK=#{rank},
+			NICK_NAME=#{nickName},
+			PIC=#{pic},
+			TITLE=#{title}
+		</set>
+		<where>
+			SHOP_COMMETNT_ID = #{id} and VERSION = #{VERSION}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="comment" />
+		where SHOP_COMMETNT_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="comment" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by SHOP_COMMETNT_ID
+	</select>
+
+	<select id="getByTwoComment" resultMap="beanMap">
+		select * from
+		<include refid="comment" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by SHOP_COMMETNT_ID DESC LIMIT 2
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="comment" />
+		where SHOP_COMMETNT_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="shopId != null and shopId != ''"> and T_SHOP_ID
+			= #{shopId}
+		</if>
+		<if test="openId != null and openId != ''"> and OPEENID
+			= #{openId}
+		</if>
+		<if test="phoneNum != null and phoneNum != ''"> and PHONE_NUM
+			= #{phoneNum}
+		</if>
+		<if test="nickName != null and nickName != ''"> and NICK_NAME
+			= #{nickName}
+		</if>
+		<if test="title != null and title != ''"> and TITLE
+			= #{title}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="comment" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by SHOP_COMMETNT_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="comment" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

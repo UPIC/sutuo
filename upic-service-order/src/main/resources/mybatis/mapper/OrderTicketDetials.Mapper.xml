@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.OrderTicketDetialsDao">
+
+	<!-- 用户信息表 -->
+	<sql id="orderTicketDetials"> T_ORDER_TICKET_DETIALS </sql>
+	<resultMap id="beanMap" type="OrderTicketDetials">
+		<result column="ORDER_TICKET_DETIALS_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="PRICE" property="price" />
+		<result column="SHOP_COUNT" property="shopCount" />
+		<result column="SHOP_NAME" property="shopName" />
+		<result column="SHOP_NUM" property="shopNum" />
+		<result column="USERNAME" property="username" />
+		<result column="ORDER_ID" property="orderId" />
+		<result column="PHONE_NUMBER" property="phoneNumber" />
+		<result column="CONFIRM_CODE" property="confirmCode" />
+		<result column="USER_ID" property="userId" />
+		<result column="DUE_TIME" property="dueTime" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="OrderTicketDetials">
+		insert into
+		<include refid="orderTicketDetials" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		PRICE,SHOP_COUNT,SHOP_NAME, SHOP_NUM,USERNAME,ORDER_ID,PHONE_NUMBER,CONFIRM_CODE,USER_ID,DUE_TIME)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{price},#{shopCount},#{shopName},
+		 #{shopNum},#{username},#{orderId},#{phoneNumber},#{confirmCode},#{userId},#{dueTime})
+	</insert>
+
+	<update id="update" parameterType="OrderTicketDetials">
+		update
+		<include refid="orderTicketDetials" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			PRICE=#{price},
+			SHOP_COUNT=#{shopCount},
+			SHOP_NAME=#{shopName},
+			SHOP_NUM=#{shopNum},
+			USERNAME=#{username},
+			ORDER_ID=#{orderId},
+			PHONE_NUMBER=#{phoneNumber},
+			CONFIRM_CODE=#{confirmCode},
+			USER_ID=#{userId},
+			DUE_TIME=#{dueTime}
+		</set>
+		<where>
+			ORDER_TICKET_DETIALS_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="orderTicketDetials" />
+		where ORDER_TICKET_DETIALS_ID = #{id}
+	</select>
+	<select id="getByOrderId" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="orderTicketDetials" />
+		where ORDER_ID = #{orderId}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="orderTicketDetials" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="orderTicketDetials" />
+		where ORDER_TICKET_DETIALS_ID = #{id}
+	</delete>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="orderTicketDetials" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by CREATETIME desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="orderTicketDetials" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="orderId != null and orderId != ''"> and ORDER_ID
+			= #{orderId}
+		</if>
+		<if test="shopNum != null and shopNum != ''"> and SHOP_NUM
+			= #{shopNum}
+		</if>
+		<if test="username != null and username != ''"> and USERNAME
+			= #{username}
+		</if>
+		<if test="phoneNumber != null and phoneNumber != ''"> and PHONE_NUMBER
+			= #{phoneNumber}
+		</if>
+		<if test="confirmCode != null and confirmCode != ''"> and CONFIRM_CODE
+			= #{confirmCode}
+		</if>
+		<if test="shopName != null and shopName != ''"> and SHOP_NAME
+			= #{shopName}
+		</if>
+		<if test="userId != null and userId != ''"> and USER_ID
+			= #{userId}
+		</if>
+		<if test="url != null and url != ''"> and URL
+			= #{url}
+		</if>
+		<if test="dueTime != null and dueTime != ''"> and DUE_TIME
+			= #{dueTime}
+		</if>
+	</sql>
+</mapper>

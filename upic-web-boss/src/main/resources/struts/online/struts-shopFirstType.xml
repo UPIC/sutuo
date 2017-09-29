@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="shopFirstType" extends="base">
+		<!-- 账户Action -->
+		<action name="shopFirstType_*" class="com.upic.web.boss.action.ShopFirstTypeAction" method="{1}">
+		<result name="shopFirstTypeActionList">page/shop/ShopFirstTypeActionList.jsp</result>
+		<result name="shopFirstTypeDetials">page/shop/ShopFirstTypeEdit.jsp</result>
+		<result name="shopFirstTypeAdd">page/shop/ShopFirstTypeAdd.jsp</result>
+		</action>
+	</package>
+
+</struts>

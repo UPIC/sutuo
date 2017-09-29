@@ -1,0 +1,47 @@
+﻿.am-icon-chevron-left{
+    color:white
+}
+.am-icon-share-square-o{
+    color:white
+}
+header{
+    background-color:black;
+    color:white
+}
+.body img{
+    width:96%;
+    
+    margin-left:2%;
+    margin-top:20px
+}
+.txt1{
+    font-size:24px;
+    margin-left:10px;
+    
+}
+.txt2{
+    color:lightgray;
+    margin-left:10px;
+    margin-top:5px
+}
+blockquote{
+    margin-left:10px
+}
+.txt3{
+    border:1px solid brown;
+    width:96%;
+   
+    margin-left:2%;
+    margin-top:5px;
+    text-align:center;
+   
+}
+.foot{
+    width:96%;
+    margin-left:2%;
+    height:80px;
+    margin-top:20px
+}
+.aa{
+    float:right
+}

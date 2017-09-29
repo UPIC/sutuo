@@ -1,0 +1,87 @@
+body{
+    background-color:whitesmoke
+}
+.am-icon-chevron-left{
+	margin-top:16px
+}
+
+.currposition {
+	font-size: 14px;
+	background-color: #FFECD1;
+	line-height: 30px;
+	color: #333;
+	padding-left: 10px;
+	border-bottom: 1px solid #FBD6A0;
+}
+.currposition-name {
+	font-style: normal;
+	color: #FFA014;
+}
+a {
+	text-decoration: none;
+	outline: medium none;
+}
+.currcity {
+	border-top: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	background-color: #FFF;
+	margin-top: 15px;
+}
+.currcity-title {
+	line-height: 30px;
+	padding-left: 10px;
+	font-size: 14px;
+	color: #888;
+	height: 47px;
+	vertical-align: middle;
+}
+.currity-span {
+	vertical-align: middle;
+	line-height: 1;
+	margin-top: 15px;
+	font-size: 20px;
+	float: left;
+}
+.currcity-field {
+	border-top: 1px solid #DDD;
+	padding-left: 10px;
+}
+.currcity-link {
+	display: block;
+	font-size: 17px;
+	line-height: 39px;
+	color: #FF6900;
+	float: right;
+	margin-right: 15px;
+	font-size: 25px;
+	line-height: 1;
+	margin-top: 10px;
+}
+
+.list{
+    width:100%;
+    margin-top:20px;
+   
+}
+.words{
+    margin-left:6%;
+   
+    font-size:18px;
+   margin-bottom:-10px
+    
+}
+li {
+    list-style: none;
+    float: left;
+    width: 25%;
+    text-align: center;
+    border: 1px solid lightgray;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+    
+}
+.li{
+    background-color:whitesmoke;
+    border:1px solid  whitesmoke
+}

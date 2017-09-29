@@ -1,0 +1,33 @@
+.am-header-default {
+    background-color: #fff;
+    color: #000;
+    border-bottom: 1px solid #f3f3f3;
+    position: fixed;
+    top:0;
+}
+.am-header-title a{
+	color: #000 !important;
+}
+.content{
+	width: 100%;
+	height: auto;
+}
+.bottom{
+	position: fixed;
+	bottom: 20px;
+	text-align: center;
+	padding-left:43%;
+}
+.bottom img{
+	width: 60px;
+	height: 60px;
+}
+.clear{
+	clear: both;
+}
+.content{
+	margin-top:50px;
+}
+.content img {
+	max-width: 100%;
+}

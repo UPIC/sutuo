@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="upic-service-user" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20879" />
+
+	<!-- 用户服务接口 -->
+	<dubbo:service interface="com.upic.service.IAddressService"
+		ref="addressService" />
+	<dubbo:service interface="com.upic.service.IMainPicService"
+		ref="mainPicService" />
+	<dubbo:service interface="com.upic.service.IProjectService"
+		ref="projectService" />
+	<dubbo:service interface="com.upic.service.IThemetzService"
+		ref="themetzService" />
+	<dubbo:service interface="com.upic.service.IProjectFirstService"
+		ref="projectFirstService" />
+	<dubbo:service interface="com.upic.service.IThemetzFirstService"
+		ref="themetzFirstService" />
+	<dubbo:service interface="com.upic.service.IActivityAreaService"
+		ref="activityAreaService" />
+	<dubbo:service interface="com.upic.service.IPicTypeService"
+		ref="picTypeService" />
+	<dubbo:service interface="com.upic.service.IYouXuanService"
+		ref="youXuanService" />
+	<dubbo:service interface="com.upic.service.IKeyWordKWService"
+		ref="keyWordKWService" />
+	<dubbo:service interface="com.upic.service.IThemeAreaService"
+		ref="themeAreaService" />
+	<dubbo:service interface="com.upic.service.IModuleListService"
+		ref="moduleListService" />
+	<dubbo:service interface="com.upic.service.IAccessService"
+		ref="accessService" />	
+	<dubbo:service interface="com.upic.service.ILeaveMessageService"
+		ref="leaveMessageService" />	
+</beans>  

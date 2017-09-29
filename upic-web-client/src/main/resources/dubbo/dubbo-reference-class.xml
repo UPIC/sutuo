@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">       
+
+    <!-- 课程对外服务接口 -->
+    <dubbo:reference interface="com.upic.service.IApplyService" id="applyService" check="false" />
+    <dubbo:reference interface="com.upic.service.IClassCategoryService" id="classCategoryService" check="false" />
+    <dubbo:reference interface="com.upic.service.IClassMajorService" id="classMajorService" check="false" />
+    <dubbo:reference interface="com.upic.service.IClassService" id="classService" check="false" />
+    <dubbo:reference interface="com.upic.service.IClassUploadService" id="classUploadService" check="false" />
+</beans>  

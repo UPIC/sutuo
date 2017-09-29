@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.ThemePnBDao">
+
+	<!-- 用户信息表 -->
+	<sql id="themePnB"> T_THEME_PN_B </sql>
+	<resultMap id="beanMap" type="ThemePnB">
+		<id column="THEME_PN_B_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="THEME_PN_B" property="themePnB" />
+		<result column="THEME_PN_B_PIC" property="themePnBPic" />
+		<result column="TYPE" property="type" />
+		<result column="THEME_PN_PAR_ID" property="themePnParId" />
+		<result column="THEME_PN_PAR_NAME" property="themePnParName" />
+		<result column="STATUS" property="status" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="ThemePnB" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="themePnB" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		THEME_PN_B,THEME_PN_B_PIC,TYPE,STATUS,THEME_PN_PAR_ID,THEME_PN_PAR_NAME)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{themePnB},#{themePnBPic}
+		,#{type},#{status},#{themePnParId},#{themePnParName})
+	</insert>
+
+	<update id="update" parameterType="ThemePnB">
+		update
+		<include refid="themePnB" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			THEME_PN_B=#{themePnB},
+			THEME_PN_B_PIC=#{themePnBPic},
+			TYPE=#{type},
+			STATUS=#{status},
+			THEME_PN_PAR_ID=#{themePnParId},
+			THEME_PN_PAR_NAME=#{themePnParName}
+		</set>
+		<where>
+			THEME_PN_B_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="themePnB" />
+		where THEME_PN_B_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="themePnB" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by THEME_PN_B_ID
+	</select>
+	<select id="listBy" resultMap="beanMap">
+		select * from
+		<include refid="themePnB" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by THEME_PN_B_ID
+	</select>
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="themePnB" />
+		where THEME_PN_B_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="themePnB != null and themePnB != ''"> and THEME_PN_B
+			= #{themePnB}
+		</if>
+		<if test="status != null and status != ''"> and STATUS
+			= #{status}
+		</if>
+		<if test="type != null and type != ''"> and TYPE
+			= #{type}
+		</if>
+		<if test="themePnParId != null and themePnParId != ''"> and THEME_PN_PAR_ID
+			= #{themePnParId}
+		</if>
+		<if test="themePnParName != null and themePnParName != ''"> and THEME_PN_PAR_NAME
+			= #{themePnParName}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="themePnB" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by THEME_PN_B_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="themePnB" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

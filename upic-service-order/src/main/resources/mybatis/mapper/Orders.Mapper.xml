@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.OrderDao">
+
+	<!-- 用户信息表 -->
+	<sql id="orders"> T_ORDER </sql>
+	<sql id="orderActivityDetials"> T_ORDER_ACTIVITY_DETIALS </sql>
+	<sql id="orderDetials"> T_ORDER_DETIALS </sql>
+	<sql id="together"> T_TOGETHER </sql>
+	<!-- <sql id="address"> T_ADDRESS </sql> -->
+	<resultMap id="beanMap" type="Order">
+		<result column="MAIN_ID" property="mainId" />
+		<result column="ORDER_ID" property="orderId" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="PAY_WAY" property="payWay" />
+		<result column="PRICE" property="price" />
+		<result column="STATUS" property="status" />
+<!-- 		<result column="T_ADDRESS_ID" property="addressId" /> -->
+		<result column="PAY_TYPE" property="payType" />
+		<result column="T_USER_ID" property="userId" />
+<!-- 		<result column="DELIVERY_ADD_TIME" property="deliveryAddTime" /> -->
+		<result column="REMARK_BUY" property="remarkBuy" />
+		<result column="REMARK_OUT" property="remarkOut" />
+<!-- 		<result column="CONFIRM_RECEIPT" property="confirmReceipt" /> -->
+		<result column="ORDER_CLASS" property="orderClass" />
+		<result column="STORE_NUMBER" property="storeNumber" />
+		<result column="SHOP_COUNT" property="shopCount" />
+		<result column="SHOP_NUMBER" property="shopNumber" />
+		<result column="JSON_ORDER_DETAIL" property="jsonOrderDetail" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Order">
+		insert into
+		<include refid="orders" />
+		(MAIN_ID,VERSION,
+		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,ORDER_ID,PAY_WAY,PRICE,STATUS,PAY_TYPE,T_USER_ID,
+		REMARK_BUY,REMARK_OUT,ORDER_CLASS,STORE_NUMBER,SHOP_COUNT,SHOP_NUMBER,JSON_ORDER_DETAIL
+		)
+		values
+		(#{mainId},0,NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{orderId},#{payWay},
+		#{price},#{status},#{payType},#{userId},#{remarkBuy},
+		#{remarkOut},#{orderClass},#{storeNumber},#{shopCount},#{shopNumber},#{jsonOrderDetail})
+	</insert>
+
+	<update id="update" parameterType="Order">
+		update
+		<include refid="orders" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			ORDER_ID=#{orderId},
+			PAY_WAY=#{payWay},
+			PRICE=#{price},
+			STATUS=#{status},
+			PAY_TYPE=#{payType},
+			T_USER_ID=#{userId},
+			REMARK_BUY=#{remarkBuy},
+			REMARK_OUT=#{remarkOut},
+			SHOP_COUNT=#{shopCount},
+			SHOP_NUMBER=#{shopNumber},
+			JSON_ORDER_DETAIL=#{jsonOrderDetail}
+		</set>
+		<where>
+			MAIN_ID = #{mainId} and VERSION = #{version}
+		</where>
+	</update>
+	
+	<update id="updateByDelete" parameterType="java.util.Map">
+		update
+		<include refid="orders" />
+		<set>
+			VERSION = #{version}+1,
+			STATUS=#{status},
+		</set>
+		<where>
+			ORDER_ID = #{orderId} and VERSION = #{version}
+		</where>
+	</update>
+	
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="orders" />
+		where MAIN_ID = #{mainId}
+	</select>
+	<select id="getByOrderId" parameterType="java.util.Map"
+		resultMap="beanMap">
+		select * from
+		<include refid="orders" />
+		where ORDER_ID = #{orderId}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="orders" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	<select id="listBy" resultMap="beanMap">
+		select * from
+		<include refid="orders" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<select id="getBy" resultMap="beanMap">
+		select * from
+		<include refid="orders" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="orders" />
+		where MAIN_ID = #{mainId}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="orderId != null and orderId != ''"> and ORDER_ID = #{orderId,jdbcType=VARCHAR}</if>
+		<if test="noIncludestatus != null and noIncludestatus != ''"> and STATUS != #{noIncludestatus,jdbcType=VARCHAR}</if>
+		<if test="userId != null and userId != ''"> and T_USER_ID = #{userId}</if>
+		<if test="orderClass != null and orderClass != ''"> and ORDER_CLASS = #{orderClass,jdbcType=VARCHAR}</if>
+		<if test="storeNumber != null and storeNumber != ''"> and STORE_NUMBER = #{storeNumber,jdbcType=VARCHAR}</if>
+		<if test="shopName != null and shopName != '' ">
+			and SHOP_NAME like
+			CONCAT(CONCAT('%',
+			#{shopName,jdbcType=VARCHAR}), '%')</if>
+		<if test="payType != null and payType != '' "> and PAY_TYPE = #{payType,jdbcType=VARCHAR}</if>
+		<if test="payWay != null and payWay != '' "> and PAY_WAY = #{payWay,jdbcType=VARCHAR}</if>
+		<if test="status != null and status != '' "> and STATUS = #{status,jdbcType=VARCHAR}</if>
+
+		<if test="orderDateBegin != null and orderDateBegin != '' ">
+			and CREATETIME <![CDATA[ >= ]]>
+			#{orderDateBegin,jdbcType=VARCHAR}
+		</if>
+		<if test="orderDateEnd != null and orderDateEnd != '' ">
+			and CREATETIME <![CDATA[ <= ]]>
+			#{orderDateEnd,jdbcType=VARCHAR}
+		</if>
+		<if test="shopType != null and shopType != '' "> and SHOP_TYPE = #{shopType,jdbcType=VARCHAR}</if>
+		<if test="createTime != null and createTime != '' "> and
+			date_format(createTime,'%Y-%m')=date_format(now(),'%Y-%m') </if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="orders" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by CREATETIME desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="orders" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<resultMap id="beanMap1" type="OrderCollect">
+		<result column="CREATETIME" property="createTime" />
+		<result column="MAIN_ID" property="mainId" />
+		<result column="ORDER_ID" property="orderId" />
+		<result column="PRICE" property="price" />
+		<result column="STATUS" property="status" />
+		<result column="T_USER_ID" property="userId" />
+		<result column="ORDER_CLASS" property="orderClass" />
+		<result column="SHOP_NAME" property="shopName" />
+		<result column="SHOP_NUMBER" property="shopNumber" />
+		<result column="SHOP_COUNT" property="shopCount" />
+		<result column="URL" property="pic" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<select id="listAllOrders" parameterType="java.util.Map"
+		resultMap="beanMap1">
+		select * from
+		<include refid="orders" />
+		a,
+		<if test="FARM != null and FARM !='' ">
+			<include refid="orderDetials" />
+			b
+		</if>
+		,
+		<if test="ACTIVITY != null and ACTIVITY !='' ">
+			<include refid="orderActivityDetials" />
+			c
+		</if>
+		,
+		<if test="TOGETHER != null and TOGETHER !='' ">
+			<include refid="together" />
+			d
+		</if>
+		<where>
+			<if test="FARM != null and FARM !='' ">
+				a.ORDER_ID = b.ORDER_ID
+			</if>
+			or
+			<if test="ACTIVITY != null and ACTIVITY !='' ">
+				a.ORDER_ID = c.ORDER_ID
+			</if>
+			or
+			<if test="TOGETHER != null and TOGETHER !='' ">
+				a.ORDER_ID = d.ORDER_ID
+			</if>
+			and a.T_USER_ID=#{userId}
+			<include refid="condition_sql_OrderCollection" />
+		</where>
+		order by a.CREATETIME desc
+	</select>
+	<sql id="condition_sql_OrderCollection">
+		<if test="status != null and status != '' "> and a.STATUS = #{status,jdbcType=VARCHAR}</if>
+		<if test="orderClass != null and orderClass != ''"> and ORDER_CLASS = #{orderClass,jdbcType=VARCHAR}</if>
+	</sql>
+</mapper>

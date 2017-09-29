@@ -1,0 +1,16 @@
+﻿.headerbox{
+    background-color:azure
+}
+.box1{
+    padding-left:3%
+}
+table{
+    width:98%;
+    
+}
+td{
+   text-align:center;
+   border:1px solid gainsboro;
+   height:35px;
+   font-size:14px
+}

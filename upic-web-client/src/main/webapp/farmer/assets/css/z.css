@@ -1,0 +1,249 @@
+html {
+    height: 100%;
+}
+
+html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, form, button, dl, dt, dd, input, textarea {
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 0px;
+    margin: 0px;
+}
+ 
+
+a {
+    text-decoration: none;
+    outline: medium none;
+}
+i {
+    font-style: normal;
+}
+.header { 
+	height: 42px;
+	border-bottom: 1px solid #E15F00;
+	background-color: #FDC212;
+     
+}
+body {
+    color: #333;
+}
+body {
+  min-width: 20em;
+  width: 100%;
+  background: #f2f2f2;
+  color: #333;
+  font: 100%/1.5 "Helvetica Neue","Microsoft Yahei",sans-serif;
+}
+.header .inner {
+    padding: 0px 10px;
+}
+.header .logo {
+    margin-top: 4px;
+}
+
+.header .place {
+    margin-left: 10px;
+    padding-top: 12px;
+}
+
+.header .place .name {
+    font-size: 16px;
+    color: #FFF;
+}
+
+.header .place .i-tri {
+    vertical-align: 1px;
+}
+.i-tri {
+    width: 10px;
+    height: 8px;
+    background-position: 0px 0px;
+}
+.icon {
+    background-image: url("http://xs01.meituan.net/waimai_i/img/sprite/icon.29273af7.png");
+    background-size: 150px 350px;
+    display: inline-block;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+.header .o-center {
+    padding-top: 12px;
+    float: right;
+}
+.clearfix {
+}
+.header .o-center .o-center-word {
+    display: inline-block;
+    vertical-align: top;
+}
+.header .o-center span {
+    font-size: 16px;
+    color: #FFF;
+}
+
+img {
+    border: 0px none;
+}
+.header .logo img {
+    width: 34px;
+    height: 34px;
+}
+ 
+.pointer, input[type=button], input[type=submit] {
+  cursor: pointer;
+}
+.clof, a.clof, a:visited.clof {
+  color: #FFF;
+}
+
+.shop_name {
+  width: 100%;
+  min-width: 320px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px; 
+   
+}
+
+.center {
+  text-align: center;
+}
+div {
+  display: block;
+}
+
+
+.geo-search {
+  position: relative;
+  padding: 15px;
+}
+
+.bindmobile-inputs, .delivery-list, .geo-cities-wrapper, .geo-search, .geo-search-empty, .geo-search-results, .hongbao-exchange-form, .logreg-inputs, .trade-block, .ui-block, .ui-padding-block {
+  margin-top: 10px;
+   
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+form {
+  display: block;
+  margin-top: 0em;
+}
+
+input.ui-input, p.ui-input, textarea.ui-textarea {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 8px 8px;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  font-size: 1rem;
+}
+
+
+.ui-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background: #3199e8;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+  text-align: center;
+  -webkit-transition: color .4s;
+  transition: color .4s;
+}
+.cdish-control, .cdish-edit, .geo-city, .geo-city-hot, .grst-filter-dropdown, .mdish-minus, .ordercomplaint-actions, .profile-hongbao-explain, .profile-hongbaoticket, .profileService-actions, .rinfo-data, .tabnav, .trade-btn-block, .ui-btn, input.ui-input, p.ui-input, textarea.ui-textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button, select {
+  text-transform: none;
+}
+button, input {
+  line-height: normal;
+}
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0;
+}
+
+.ui-loader.geo-search-loading {
+  top: auto;
+  bottom: -5px;
+}
+.ui-loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  background: #3199e8;
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: top;
+  transform-origin: top;
+  -webkit-transition: -webkit-transform .3s;
+  transition: transform .3s;
+}
+
+.geo-search-error {
+  display: none;
+  margin: 10px 0 0;
+  padding: 10px;
+  background: #ea3106;
+  color: #fff;
+  font-size: .875rem;
+}
+
+.geo-search-empty {
+  display: none;
+  padding: 10px;
+  color: #666;
+}
+
+.bindmobile-inputs, .delivery-list, .geo-cities-wrapper, .geo-search, .geo-search-empty, .geo-search-results, .hongbao-exchange-form, .logreg-inputs, .trade-block, .ui-block, .ui-padding-block {
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+.geo-search-result:first-of-type {
+  border-top-color: #ddd;
+}
+.geo-search-result {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  display: block;
+  color: #08c;
+  background: #fff;
+}
+
+.geo-search-results.ui_show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.gsr-detail>.spot {
+  margin: 0;
+  color: #333;
+}
+.gsr-detail>.address {
+  margin: 0;
+  font-size: .75em;
+  color: #999;
+}
+ 

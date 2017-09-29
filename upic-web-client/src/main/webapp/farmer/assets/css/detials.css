@@ -1,0 +1,132 @@
+
+.am-icon-chevron-left{
+	margin-top:15px;
+}
+
+
+#img-round{
+	
+	
+    width:100%;
+    height:150px !important
+}
+.am-slides img{
+    width:100%;
+    height:160px
+}
+
+   .box1{
+     width:100%;
+     background-color:white;
+    
+      text-align:center
+    }
+
+
+   .box1 .am-circle{
+      margin-top:5px
+   }
+article{
+    text-align:center;
+    margin-top:10px;
+    padding-top:20px
+}
+article img{
+    width:25px;
+    height:25px;
+   
+    
+}
+.art{
+    margin-top:2px !important
+}
+.aa{
+    font-size:22px;
+    font-weight:bold
+}
+.img{
+    margin-top:10px
+}
+.name{
+    font-size:18px;
+    font-weight:bold
+}
+article span {
+    font-size: 16px;
+    font-weight: bold;
+    
+ }
+
+.reason{
+    padding-top:20px
+}
+.pp{
+    color:orangered
+}
+
+.box2{
+    margin-top:2px;
+    background-color:white
+}
+.box2 span{
+    margin-left:10px
+}
+.box2 img{
+    float:right;
+    width:25px;
+    height:25px;
+    margin-right:10px
+}
+
+.picturebox{
+ width:100%;
+  text-align:center;
+  padding-top:20px
+}
+
+
+.txtbox{
+    text-align:center;
+    height:50px
+}
+.txtbox1{
+    margin-left:30%;
+    margin-top:30px;
+    width:150px;
+    height:45px;
+    line-height:45px;
+    font-size:18px;
+    font-weight:bold;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+
+}
+
+.ul2{
+    float:right
+}
+
+.tablebox{
+    width:84%;
+    height:380px;
+    padding-top:20px;
+    margin-left:8%;
+    text-align:center
+}
+ .tablebox1{
+     float:left;
+     margin-top:20px;
+    
+ }
+
+ .tablebox2{
+     float:right;
+     margin-top:20px;
+     
+ }
+
+ .box3{
+     text-align:center;
+     width:100%;
+     height:500px
+ }

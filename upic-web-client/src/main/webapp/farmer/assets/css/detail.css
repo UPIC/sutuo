@@ -1,0 +1,45 @@
+﻿ .am-form-inline{
+            width:100%; 
+            text-align:center;
+            height:50px;
+            line-height:50px
+        }
+        .am-icon-arrow-left{
+            float:left; 
+            padding-left:10px
+        }
+        .am-icon-external-link{
+            float:right; 
+            padding-right:10px
+        }
+        .img{
+            width:100%;
+            height:280px
+        }
+        .text{
+            font-size:20px;
+           
+            
+            
+        }
+        .one{
+            margin-top:10px;
+            padding-left:10px
+            
+        }
+        .price{
+            color:red;
+            
+            padding-top:30px
+        }
+        .watch{
+            float:right;
+            padding-right:10px;
+            color:gray
+        }
+        .am-icon-phone{
+            padding-left:10px
+        }
+        .mm{
+            margin-top:30px;
+        }

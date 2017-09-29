@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="ActivityArea" extends="json-default">
+		<interceptors>
+			<!--定义属性驱动的拦截器 -->
+			<interceptor name="params"
+				class="com.opensymphony.xwork2.interceptor.ParametersInterceptor"></interceptor>
+			<!--定义模型驱动的拦截器 -->
+			<interceptor name="model-driven"
+				class="com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor"></interceptor>
+			<!-- 异常拦截器 -->
+			<interceptor name="exceptionInterceptor"
+				class="wusc.edu.pay.web.boss.interceptor.ExceptionInterceptor"></interceptor>
+			<!-- 用于去掉请求参数前后空格的拦截器 -->
+			<interceptor name="trimInterceptor"
+				class="com.upic.common.web.interceptor.TrimInterceptor"></interceptor>
+			<!-- 操作员登录拦截器 -->
+			<interceptor name="operatorLoginInterceptor"
+				class="wusc.edu.pay.web.permission.interceptor.OperatorLoginInterceptor"></interceptor>
+			<interceptor name="fileUpload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor">
+				<param name="maximumSize">20971520</param>
+				<param name="allowedTypes">
+					image/gif,image/png,image/bmp,image/pjpeg,image/jpg,image/jpeg
+				</param>
+			</interceptor>
+		</interceptors>
+		<global-results>
+			<result name="exception">page/common/error.jsp</result>
+			<result name="operateSuccess">page/common/operateSuccess.jsp</result>
+			<result name="operateError">page/common/operateError.jsp</result>
+			<result name="permissionError">page/common/permissionError.jsp</result>
+		</global-results>
+		<!-- 账户Action -->
+		<action name="activityArea_*" class="com.upic.web.boss.action.ActiveAreaAction"
+			method="{1}">
+			<result name="listActiveArea">page/activityArea/activityAreaActionList.jsp
+			</result>
+			<result name="addBanner">page/activityArea/activityAreaAdd.jsp</result>
+			<result name="updateDetials">page/activityArea/activityAreaEdit.jsp</result>
+		</action>
+	</package>
+
+</struts>

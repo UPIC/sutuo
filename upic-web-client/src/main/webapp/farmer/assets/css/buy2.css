@@ -1,0 +1,118 @@
+﻿.am-icon-arrow-left{
+    color:black
+}
+.table{
+    height:55px;
+    background-color:gainsboro;
+    width:100%;
+}
+td img{
+    width:20px;
+    height:20px;
+    float:left;
+    margin-top:13px;
+    
+   
+}
+td span{
+    font-size:8px
+}
+td div{
+    float:left;
+}
+tr{
+    width:100%;
+}
+td{
+    vertical-align:center;
+    padding:0px 10px;
+    
+}
+.center{
+    line-height:55px !important;
+    margin-top:25px !important;
+}
+.am-table>tbody>tr>td, .am-table>tbody>tr>th, .am-table>tfoot>tr>td, .am-table>tfoot>tr>th, .am-table>thead>tr>td, .am-table>thead>tr>th{
+    padding-top:0px !important;
+}
+.box1 td{
+    width:50%;
+}
+.am-radius{
+    width:80%;
+    height:80px
+}
+.span{
+    font-size:14px;
+
+}
+.num{
+    font-size:8px;
+    color:gray
+}
+
+
+.box4{
+    height:50px;
+    margin-top:40px
+}
+   
+ .number-left{
+     float: left;
+     margin-left: 5%; 
+     margin-top: 2%
+
+ }
+ .right{
+     float:right;
+     margin-right:5%;
+     margin-top:2%
+ }
+
+.count {
+ margin-right: 5%;
+    float: right;
+}
+.count .add, .count input, .count .reduce {
+    float: left;
+    margin-right: -1px;
+    position: relative;
+    z-index: 0;
+}
+.count .add, .count .reduce {
+    height: 40px;
+    width: 50px;
+    border: 1px solid #e5e5e5;
+    background: white;
+    text-align: center;
+    line-height: 40px;
+    color: #444;
+}
+.count .add:hover, .count .reduce:hover {
+    color: #f50;
+    z-index: 3;
+    border-color: #f60;
+    cursor: pointer;
+}
+.count input {
+    width: 50px;
+    height:40px;
+    line-height: 15px;
+    border: 1px solid #e5e5e5;
+    color: #343434;
+    text-align: center;
+    padding: 4px 0;
+    background-color: #fff;
+    z-index: 2;
+}
+li{
+    list-style:none;
+    height:50px;
+    background-color:white;
+    border-bottom:1px solid whitesmoke
+}
+.aa{
+    border:0px;
+    margin-left:10px;
+    margin-top:10px
+}

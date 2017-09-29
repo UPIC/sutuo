@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:reference interface="com.upic.service.IAddressService"
+		id="addressService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IMainPicService"
+		id="mainPicService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IProjectService"
+		id="projectService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IThemetzService"
+		id="themetzService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IProjectFirstService"
+		id="projectFirstService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IThemetzFirstService"
+		id="themetzFirstService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IActivityAreaService"
+		id="activityAreaService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IPicTypeService"
+		id="picTypeService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IYouXuanService"
+		id="youXuanService" />
+	<dubbo:reference interface="com.upic.service.IThemeAreaService"
+		id="themeAreaService" />	
+	<dubbo:reference interface="com.upic.service.IModuleListService"
+		id="moduleListService" />	
+	<dubbo:reference interface="com.upic.service.IAccessService"
+		id="accessService" />
+	<dubbo:reference interface="com.upic.service.ILeaveMessageService"
+		id="leaveMessageService" />		
+</beans>  

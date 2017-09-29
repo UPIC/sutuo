@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 课程发布对外服务接口 -->
+	<dubbo:reference interface="com.upic.service.IShopService"
+		id="shopService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopPicService"
+		id="shopPicService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopTypeService"
+		id="shopTypeService" check="false" />
+	<dubbo:reference interface="com.upic.service.IAnnouncementService"
+		id="announcementTypeService" check="false" />
+
+	<dubbo:reference interface="com.upic.service.IShopTicketService"
+		id="shopTicketService" check="false" />
+	<dubbo:reference interface="com.upic.service.IFirstTypeService"
+		id="firstTypeService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopFarmService"
+		id="shopFarmService" check="false" />
+
+	<dubbo:reference interface="com.upic.service.IShopSignLinkService"
+		id="shopSignLinkService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopSignService"
+		id="shopSignService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopThemeService"
+		id="shopThemeService" check="false" />
+</beans>  

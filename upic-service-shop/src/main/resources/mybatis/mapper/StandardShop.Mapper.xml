@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.StandardShopDao">
+
+	<!-- 商品属性表 -->
+	<sql id="standardShop"> T_STANDARD_SHOP </sql>
+	<resultMap id="beanMap" type="StandardShop">
+		<id column="STANDARD_SHOP_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="STANDARD_TYPE_FIRST" property="standardTypeFirst" />
+		<result column="STANDARD_TYPE_SECOND" property="standardTypeSecond" />
+		<result column="STANDARD_TYPE_THIRD" property="standardTypeThird" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="StandardShop" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="standardShop" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		STANDARD_TYPE_FIRST,STANDARD_TYPE_SECOND,STANDARD_TYPE_THIRD)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{typeName},#{standardTypeFirst},#{standardTypeSecond},#{standardTypeThird})
+	</insert>
+
+	<update id="update" parameterType="StandardShop">
+		update
+		<include refid="standardShop" />
+		<set>
+			version = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			STANDARD_TYPE_FIRST=#{standardTypeFirst},
+			STANDARD_TYPE_SECOND=#{standardTypeSecond},
+			STANDARD_TYPE_THIRD=#{standardTypeThird}
+		</set>
+		<where>
+			STANDARD_SHOP_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="standardShop" />
+			where STANDARD_SHOP_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="standardShop" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STANDARD_SHOP_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="standardShop" />
+		where STANDARD_SHOP_ID = #{standardShopId}
+	</delete>
+
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="standardShop" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STANDARD_SHOP_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="standardShop" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="standardTypeFirst != null and standardTypeFirst != ''"> and STANDARD_TYPE_FIRST
+			= #{standardTypeFirst}
+		</if>
+		<if test="standardTypeSecond != null and standardTypeSecond != ''"> and STANDARD_TYPE_SECOND
+			= #{standardTypeSecond}
+		</if>
+		<if test="standardTypeThird != null and standardTypeThird != ''"> and STANDARD_TYPE_THIRD
+			= #{standardTypeThird}
+		</if>
+		<if test="shopId != null and shopId != ''"> and SHOP_ID
+			= #{shopId}
+		</if>
+	</sql>
+
+</mapper>

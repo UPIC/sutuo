@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:reference interface="com.upic.service.IShopService"
+		id="shopService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopPicService"
+		id="shopPicService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopTypeService"
+		id="shopTypeService" check="false" />
+	<dubbo:reference interface="com.upic.service.ICommentService"
+		id="commentService" check="false" />
+	<dubbo:reference interface="com.upic.service.IAnnouncementService"
+		id="announcementService" check="false" />
+	<dubbo:reference interface="com.upic.service.IProjectShopService"
+		id="projectShopService" check="false"/>
+	<dubbo:reference interface="com.upic.service.IThemetzShopService"
+		id="themetzShopService" check="false"/>	
+	<dubbo:reference interface="com.upic.service.IShopCollectionService"
+		id="shopCollectionService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopTicketService"
+		id="shopTicketService" check="false" />	
+		
+		
+		<!-- 商品类型列表 -->
+	<dubbo:reference interface="com.upic.service.ITypeShopFarmService"
+		id="typeShopFarmService" check="false" />	
+		<!-- 中间表 -->
+	<dubbo:reference interface="com.upic.service.ITypeFarmShopService"
+		id="typeFarmShopService" check="false" />		
+</beans>  

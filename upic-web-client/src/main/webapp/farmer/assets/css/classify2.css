@@ -1,0 +1,92 @@
+﻿
+     .am-header-left img{
+         width:50px !important;
+         height:30px !important
+     }
+
+
+   .activity{
+           
+            width:100%; 
+            height:100px; 
+            background-size:100%;
+            background-repeat:no-repeat;
+            margin-left:3px
+            
+
+        }
+        .bg{
+            background-color:rgba(0,0,0,.3);
+            height:100px
+        }
+        .aa{
+            font-size:20px;
+            color:white;
+            font-family:Arial;
+            font-weight:bold;
+            line-height:100px;
+            padding-left:40px
+
+        }
+        li{
+            padding-left:5px
+        }
+
+  
+
+         
+        .am-form-field{
+           width:100% !important;
+           height:25px !important;
+           margin-top:12px;
+       } 
+       .am-btn-default{
+           height:25px !important;
+
+       }
+       .am-icon-search{
+           padding-bottom:5px
+       }
+       .am-btn{
+           padding:0px !important
+       }
+       .am-header-title{
+           margin-left:70px !important;
+           margin-right:60px !important;
+       }
+      a{
+          color:black
+      }
+    .p1 img{
+        width:40px !important;
+        height:40px !important;
+    }
+
+    .smallbox{
+        width:100%;
+        padding-top:20px;
+        height:135px
+    }
+    .left{
+        float:left;
+        width:45%;
+        padding-left:10px
+    }
+    .left .am-radius{
+        width:95%
+    }
+    .right{
+      float:right;
+      width:50%;
+      padding-right:10px
+    }
+    .right .txt{
+        font-size:16px;
+        color:sandybrown;
+        padding-top:15px
+    }
+    .div{
+        width:100%;
+        height:5px;
+        background-color:whitesmoke
+    }

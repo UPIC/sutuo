@@ -1,0 +1,53 @@
+﻿.am-icon-chevron-left{
+    color:black
+}
+.am-header-title span{
+    font-size:12px
+}
+body{
+    background-color:whitesmoke
+}
+header{
+    background-color:white
+}
+.big{
+    background-color:white;
+    width:94%;
+    margin-left:3%;
+    margin-top:10px;
+    padding-bottom:10px;
+    border-radius:10px;
+    padding-left:3%;
+    padding-top:10px;
+    padding-right:3%;
+    height:auto;
+    margin-bottom:10px
+}
+.box1{
+    font-size:12px;
+    color:gray
+}
+.box2{
+    font-size:18px;
+    font-weight:bold;
+    margin-top:10px
+}
+.big img{
+    margin-top:10px
+}
+.box3{
+    font-size:14px;
+    color:gray;
+    margin-top:10px
+}
+.hr{
+    height:2px;
+    background-color:whitesmoke
+}
+.box4{
+    margin-top:10px;
+   
+}
+.big .am-icon-chevron-right{
+    float:right
+}

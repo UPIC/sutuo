@@ -1,0 +1,84 @@
+﻿
+
+header i{
+    color:black
+}
+
+#ul{
+    text-align:center !important;
+    
+}
+
+
+div{
+    border:0px !important;
+    background-color:white
+}
+.am-tabs-d2 li{
+    background-color:white
+}
+
+
+.box1{
+    margin-top:25px
+}
+.box1 .boxleft{
+    float:left;
+    height:30px;
+    line-height:30px;
+    padding-left:10px
+}
+
+.box1 .boxright{
+    float:right;
+    height:30px;
+    line-height:30px;
+    padding-right:10px
+}
+.box2{
+    width:100% !important
+}
+.box2 .img{
+    float:left;
+    width:40%
+
+}
+ .box2 .txt{
+    float:right;
+    width:60% !important;
+    padding-left:5%
+}
+
+
+ .box3{
+     margin-top:20px
+ }
+ .box4 .img{
+    float:left;
+    width:40%;
+    padding-left:10px
+
+}
+ .box4 .txt{
+    float:right;
+    width:50% !important;
+    
+}
+
+ .box5{
+     width:100%;
+     margin-left:10px
+ }
+ .span1{
+     float:left;
+     font-size:14px;
+     color:gray;
+     padding-top:20px
+ }
+
+.box5 button{
+    float:right;
+    
+    margin-right:10% !important;
+    margin-top:10px
+}

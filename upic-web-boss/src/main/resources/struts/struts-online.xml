@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 在线支付运营管理包 -->
+	<package name="onlinePackage" extends="loginPackage">
+	</package>
+	<!-- Struts2配置文件分模块引用 -->
+	<include file="struts/online/struts-shop.xml" />
+	<include file="struts/online/struts-shopType.xml" />
+	<include file="struts/online/struts-order.xml" />
+	<include file="struts/online/struts-reTrad.xml" />
+	<include file="struts/online/struts-express.xml" />
+	<include file="struts/online/struts-announcement.xml" />
+	<include file="struts/online/struts-browseRecords.xml" />
+	<include file="struts/online/struts-store.xml" />
+	<include file="struts/online/struts-shopTheme.xml" />
+	<include file="struts/online/struts-browseRecords.xml" />
+	<include file="struts/online/struts-user.xml" />
+	<include file="struts/online/struts-shopFirstType.xml" />
+	<include file="struts/online/struts-youxuan.xml" />
+	<include file="struts/online/struts-ajax.xml" />
+	<include file="struts/online/struts-banner.xml" />
+	<include file="struts/online/struts-activeArea.xml" />
+	<include file="struts/online/struts-bannerPn.xml" />
+	<include file="struts/online/struts-themeArea.xml" />
+	<include file="struts/online/struts-themePn.xml" />
+	<include file="struts/online/struts-typePn.xml" />
+	<include file="struts/online/struts-signPn.xml" />
+	<include file="struts/online/struts-signPnLink.xml" />
+	<include file="struts/online/struts-hotThemePn.xml" />
+	<include file="struts/online/struts-hotThemePnLink.xml" />
+	<include file="struts/online/struts-moduleList.xml" />
+	<include file="struts/online/struts-access.xml" />
+</struts>

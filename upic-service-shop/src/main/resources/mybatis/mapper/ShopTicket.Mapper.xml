@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.ShopTicketDao">
+
+	<!-- 用户信息表 -->
+	<sql id="shopTicket"> T_SHOP_TICKET </sql>
+	<resultMap id="beanMap" type="ShopTicket">
+		<id column="TICKET_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="TICKET_NUMBER" property="ticketNumber" />
+		<result column="START_TIME" property="startTime" />
+		<result column="END_TIME" property="endTime" />
+		<result column="USE_TIME" property="useTime" />
+		<result column="ADDRESS_ID" property="addressId" />
+		<result column="ACTIVITY_DETIELS" property="activityDetials" />
+		<result column="RULES" property="relus" />
+		<result column="T_SHOP_ID" property="shopId" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+		<result column="ADVICE" property="advice" />
+		<result column="PROJECT_BRIEF" property="projectBrief" />
+	</resultMap>
+
+	<insert id="insert" parameterType="ShopTicket" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="shopTicket" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,TICKET_NUMBER,START_TIME,END_TIME,USE_TIME,ADDRESS_ID,ACTIVITY_DETIELS,RULES,T_SHOP_ID,ADVICE,PROJECT_BRIEF)
+		values (0,NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{ticketNumber},#{startTime},#{endTime},#{useTime},#{addressId},#{activityDetials},#{relus},#{shopId},#{advice},#{projectBrief})
+	</insert>
+
+	<update id="update" parameterType="ShopTicket">
+		update
+		<include refid="shopTicket" />
+		<set>
+			version = #{version}+1,
+			START_TIME=#{startTime},
+			END_TIME=#{endTime},
+			USE_TIME=#{useTime},
+			ACTIVITY_DETIELS=#{activityDetials},
+			RULES=#{relus},
+			ADVICE=#{advice},
+			PROJECT_BRIEF=#{projectBrief}
+		</set>
+		<where>
+			TICKET_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="shopTicket" />
+			where TICKET_ID = #{id}
+	</select>
+	
+	<select id="getByShopId" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="shopTicket" />
+		where T_SHOP_ID = #{shopId}
+	</select>
+
+	<select id="getByField1" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="shopTicket" />
+		where FIELD1 = #{field1}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="shopTicket" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by TICKET_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="shopTicket" />
+		where TICKET_ID = #{shopTypeId}
+	</delete>
+
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="ticketNumber != null and ticketNumber != ''"> and TICKET_NUMBER
+			= #{ticketNumber}
+		</if>
+
+		<if test="field1 != null and field1 != ''"> and FIELD1
+			= #{field1}
+		</if>
+		<if test="shopId != null and shopId != ''"> and T_SHOP_ID
+			= #{shopId}
+		</if>
+		<if test="advice != null and advice != ''"> and ADVICE
+			= #{advice}
+		</if>
+		<if test="projectBrief != null and projectBrief != ''"> and PROJECT_BRIEF
+			= #{projectBrief}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="shopTicket" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by TICKET_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="shopTicket" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

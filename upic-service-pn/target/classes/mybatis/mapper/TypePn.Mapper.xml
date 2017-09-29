@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.TypePnDao">
+
+	<!-- 用户信息表 -->
+	<sql id="typePn"> T_TYPE_PN </sql>
+	<resultMap id="beanMap" type="TypePn">
+		<id column="TYPE_PN_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="TYPE_PN" property="typePn" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+		<result column="THEMENAME" property="themeName" />
+		<result column="STATUS" property="status" />
+		<result column="TITLE" property="title" />
+		<result column="PIC" property="picUrl" />
+		<result column="ARTICAL_NAME" property="articName" />
+		<result column="TYPE_PN_NUMBER" property="typePnNumber" />
+	</resultMap>
+
+	<insert id="insert" parameterType="TypePn" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="typePn" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		TYPE_PN,THEMENAME,TITLE,PIC,ARTICAL_NAME,STATUS,TYPE_PN_NUMBER)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{typePn},
+		#{themeName},#{title},#{picUrl},#{articName},102,#{typePnNumber})
+	</insert>
+
+	<update id="update" parameterType="TypePn">
+		update
+		<include refid="typePn" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			TYPE_PN=#{typePn},
+			STATUS=#{status},
+			THEMENAME=#{themeName},
+			TITLE=#{title},
+			PIC=#{picUrl},
+			ARTICAL_NAME=#{articName}
+		</set>
+		<where>
+			TYPE_PN_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="typePn" />
+		where TYPE_PN_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="typePn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by TYPE_PN_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="typePn" />
+		where TYPE_PN_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="typePn != null and typePn != ''"> and TYPE_PN
+			= #{typePn}
+		</if>
+		<if test="themeName != null and themeName != ''"> and THEMENAME
+			= #{themeName}
+		</if>
+		<if test="status != null and status != ''"> and STATUS
+			= #{status}
+		</if>
+		<if test="typePnNumber != null and typePnNumber != ''"> and TYPE_PN_NUMBER
+			= #{typePnNumber}
+		</if>
+		
+		<if test="typePnNumberLike != null and typePnNumberLike != ''"> and TYPE_PN_NUMBER
+			like
+			CONCAT(CONCAT('%',
+			#{typePnNumberLike}), '%')
+		</if>
+		
+		<if test="title != null and title != ''"> and TITLE
+			like
+			CONCAT(CONCAT('%',
+			#{title}), '%')
+		</if>
+		<if test="articName != null and articName != ''"> and ARTICAL_NAME
+			like
+			CONCAT(CONCAT('%',
+			#{articName}), '%')
+		</if>
+		<if test="orderDateBegin != null and orderDateBegin != '' ">
+			and LAST_GROUNDING_TIME <![CDATA[ >= ]]>
+			#{orderDateBegin,jdbcType=VARCHAR}
+		</if>
+		<if test="orderDateEnd != null and orderDateEnd != '' ">
+			and LAST_GROUNDING_TIME <![CDATA[ <= ]]>
+			#{orderDateEnd,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="typePn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by TYPE_PN_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="typePn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

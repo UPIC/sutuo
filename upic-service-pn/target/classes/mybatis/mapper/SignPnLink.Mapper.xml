@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.SignPnLinkDao">
+
+	<!-- 用户信息表 -->
+	<sql id="signPnLink"> T_SIGN_PN_LINK </sql>
+	<resultMap id="beanMap" type="SignPnLink">
+		<id column="SIGN_PN_LINK_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="T_SIGN_PN_ID" property="signPnId" />
+		<result column="T_TYPE_PN_ID" property="typePnId" />
+		<result column="SIGN_PN" property="signPn" />
+		<result column="PIC" property="pic" />
+		<result column="TITLE" property="title" />
+		<result column="ARTICAL_NAME" property="articalName" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="SignPnLink" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="signPnLink" />
+		(VERSION,
+		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,T_SIGN_PN_ID,T_TYPE_PN_ID,SIGN_PN,PIC,TITLE,
+		ARTICAL_NAME)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{signPnId},#{typePnId},#{signPn},#{pic},#{title},#{articalName})
+	</insert>
+
+	<update id="update" parameterType="SignPnLink">
+		update
+		<include refid="signPnLink" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			T_SIGN_PN_ID=#{signPnId},
+			T_TYPE_PN_ID=#{typePnId},
+			SIGN_PN=#{signPn},
+			PIC=#{pic},
+			TITLE=#{title},
+			ARTICAL_NAME=#{articalName}
+		</set>
+		<where>
+			SIGN_PN_LINK_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+
+	<update id="updateBySignPnId" parameterType="SignPnLink">
+		update
+		<include refid="signPnLink" />
+		<set>
+			VERSION = VERSION+1,
+			SIGN_PN=#{signPn}
+		</set>
+		<where>
+			T_SIGN_PN_ID = #{signPnId} 
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="signPnLink" />
+		where SIGN_PN_LINK_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="signPnLink" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by SIGN_PN_LINK_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="signPnLink" />
+		where SIGN_PN_LINK_ID = #{id}
+	</delete>
+	<select id="getByTwoId" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="signPnLink" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	<delete id="deleteBySinPnId" parameterType="long">
+		delete from
+		<include refid="signPnLink" />
+		where T_SIGN_PN_ID = #{sinPnId}
+	</delete>
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="signPnId != null and signPnId != ''"> and T_SIGN_PN_ID
+			= #{signPnId}
+		</if>
+		<if test="typePnId != null and typePnId != ''"> and T_TYPE_PN_ID
+			= #{typePnId}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="signPnLink" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by SIGN_PN_LINK_ID desc
+	</select>
+
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="signPnLink" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

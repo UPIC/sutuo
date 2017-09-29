@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	<!-- 品农 -->
+	<dubbo:reference interface="com.upic.service.IBannarPnService"
+		id="bannarPnService" check="false" />
+	<dubbo:reference interface="com.upic.service.IThemePnService"
+		id="themePnService" check="false" />
+	<dubbo:reference interface="com.upic.service.ITypePnService"
+		id="typePnService" check="false" />
+	<dubbo:reference interface="com.upic.service.IArticalPnService"
+		id="articalPnService" check="false" />
+	<dubbo:reference interface="com.upic.service.IMeituPnService"
+		id="meituPnService" check="false" />
+	<dubbo:reference interface="com.upic.service.IDianZanWenZhangPnService"
+		id="dianZanWenZhangPnService" check="false" />
+	<dubbo:reference interface="com.upic.service.IPingLunWenZhangPnService"
+		id="pingLunWenZhangPnService" check="false" />
+	<dubbo:reference interface="com.upic.service.IDianZanMeituPnService"
+		id="dianZanMeituPnService" check="false" />
+	<dubbo:reference interface="com.upic.service.IPingLunMeituPnService"
+		id="pingLunMeituPnService" check="false" />
+	<dubbo:reference interface="com.upic.service.ISignPnLinkService"
+		id="signPnLinkService" check="false" />
+	<dubbo:reference interface="com.upic.service.ISignPnService"
+		id="signPnService" check="false" />	
+		
+	<dubbo:reference interface="com.upic.service.IThemePnBService"
+		id="themePnBService" check="false" />
+	<dubbo:reference interface="com.upic.service.IHotThemePnService"
+		id="hotThemePnService" check="false" />		
+	<dubbo:reference interface="com.upic.service.IHotThemePnLinkService"
+		id="hotThemePnLinkService" check="false" />			
+</beans>  

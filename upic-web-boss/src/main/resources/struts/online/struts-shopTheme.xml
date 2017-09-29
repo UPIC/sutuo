@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="ShopTheme" extends="base">
+		<!-- 账户Action -->
+		<action name="shopTheme_*" class="com.upic.web.boss.action.ShopThemeAction" method="{1}">
+		<result name="shopThemeActionList">page/shop/ShopThemeActionList.jsp</result>
+		<result name="ShopTypeDetials">page/shop/ShopThemeEdit.jsp</result>
+		<result name="shopThemeAdd">page/shop/ShopThemeAdd.jsp</result>
+		<result name="success" type="redirectAction">
+				<param name="actionName">shopType_listShop</param>
+			</result>
+		</action>
+	</package>
+
+</struts>

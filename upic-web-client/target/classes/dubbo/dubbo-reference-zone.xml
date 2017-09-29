@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 课程发布对外服务接口 -->
+	<dubbo:reference interface="com.upic.service.IProvinceService"
+		id="provinceService" check="false" />
+	<dubbo:reference interface="com.upic.service.ICityService"
+		id="cityService" check="false" />
+	<dubbo:reference interface="com.upic.service.IDistrictService"
+		id="districtService" check="false" />
+	<dubbo:reference interface="com.upic.service.ICityWithoutQuService"
+		id="cityWithoutQuService" check="false" />	
+</beans>  

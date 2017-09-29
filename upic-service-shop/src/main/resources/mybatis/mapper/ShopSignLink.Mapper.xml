@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.ShopSignLinkDao">
+
+	<!-- 用户信息表 -->
+	<sql id="shopSignLink"> T_SHOP_SIGN_LINK </sql>
+	<resultMap id="beanMap" type="ShopSignLink">
+		<id column="SHOP_SIGN_LINK_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="T_SHOP_ID" property="shopId" />
+		<result column="T_SIGN_ID" property="signId" />
+		<result column="SIGN_NAME" property="signName" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="ShopSignLink" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="shopSignLink" />
+		(VERSION, CREATETIME,SIGN_NAME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		T_SHOP_ID,
+		T_SIGN_ID)
+		values (0,
+		NOW(),#{signName},#{field1},#{field2},#{field3},#{field4},#{field5},#{shopId},#{signId})
+	</insert>
+
+	<update id="update" parameterType="ShopSignLink">
+		update
+		<include refid="shopSignLink" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			T_SHOP_ID=#{shopId},
+			T_SIGN_ID=#{signId},
+			SIGN_NAME=#{signName}
+		</set>
+		<where>
+			SHOP_SIGN_LINK_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="shopSignLink" />
+		where SHOP_SIGN_LINK_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="shopSignLink" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by SHOP_SIGN_LINK_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="shopSignLink" />
+		where SHOP_SIGN_LINK_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="shopId != null and shopId != ''"> and T_SHOP_ID
+			= #{shopId}
+		</if>
+		<if test="signId != null and signId != ''"> and T_SIGN_ID
+			= #{signId}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="shopSignLink" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by SHOP_SIGN_LINK_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="shopSignLink" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

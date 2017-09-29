@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.AddressDao">
+
+	<!-- 用户信息表 -->
+	<sql id="address"> T_ADDRESS </sql>
+	<resultMap id="beanMap" type="Address">
+		<id column="ADDRESS_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="ADDRESS_DETILS" property="addressDetails" />
+		<result column="T_USER_ID" property="userId" />
+		<result column="T_ZIP_CODE" property="zipCode" />
+		<result column="PROVINCE_NAME" property="provinceName" />
+		<result column="CITY_NAME" property="cityName" />
+		<result column="DISTRICT_NAME" property="districtName" />
+		<result column="RECIPIENTS_NAME" property="recipientsName" />
+		<result column="PHONE_NUM" property="phoneNum" />
+		<result column="DEFAULT_ADDRESS" property="defaultAddress" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Address" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="address" />
+		(VERSION,
+		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,ADDRESS_DETILS,T_USER_ID,T_ZIP_CODE,PROVINCE_NAME,CITY_NAME,DISTRICT_NAME,RECIPIENTS_NAME,PHONE_NUM,DEFAULT_ADDRESS)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{addressDetails},#{userId},#{zipCode},#{provinceName},#{cityName},#{districtName},#{recipientsName},#{phoneNum},#{defaultAddress})
+	</insert>
+
+	<update id="update" parameterType="Address">
+		update
+		<include refid="address" />
+		<set>
+			version = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			ADDRESS_DETILS=#{addressDetails},
+			T_USER_ID=#{userId},
+			T_ZIP_CODE=#{zipCode},
+			PROVINCE_NAME=#{provinceName},
+			CITY_NAME=#{cityName},
+			DISTRICT_NAME=#{districtName},
+			RECIPIENTS_NAME=#{recipientsName},
+			PHONE_NUM=#{phoneNum},
+			DEFAULT_ADDRESS=#{defaultAddress}
+		</set>
+		<where>
+			ADDRESS_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="address" />
+		where ADDRESS_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="address" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by ADDRESS_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="address" />
+		where ADDRESS_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="userId != null and userId != ''"> and T_USER_ID
+			= #{userId}
+		</if>
+		<if test="provinceName != null and provinceName != ''"> and PROVINCE_NAME
+			= #{provinceName}
+		</if>
+		<if test="cityName != null and cityName != ''"> and CITY_NAME
+			= #{cityName}
+		</if>
+		<if test="districtName != null and districtName != ''"> and DISTRICT_NAME
+			= #{districtName}
+		</if>
+		<if test="phoneNum != null and phoneNum != ''"> and PHONE_NUM
+			= #{phoneNum}
+		</if>
+		<if test="defaultAddress != null and defaultAddress != ''"> and DEFAULT_ADDRESS
+			= #{defaultAddress}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="address" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by ADDRESS_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="address" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

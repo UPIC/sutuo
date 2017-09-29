@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="TypePn" extends="json-default">
+		<interceptors>
+			<!--定义属性驱动的拦截器 -->
+			<interceptor name="params"
+				class="com.opensymphony.xwork2.interceptor.ParametersInterceptor"></interceptor>
+			<!--定义模型驱动的拦截器 -->
+			<interceptor name="model-driven"
+				class="com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor"></interceptor>
+			<!-- 异常拦截器 -->
+			<interceptor name="exceptionInterceptor"
+				class="wusc.edu.pay.web.boss.interceptor.ExceptionInterceptor"></interceptor>
+			<!-- 用于去掉请求参数前后空格的拦截器 -->
+			<interceptor name="trimInterceptor"
+				class="com.upic.common.web.interceptor.TrimInterceptor"></interceptor>
+			<!-- 操作员登录拦截器 -->
+			<interceptor name="operatorLoginInterceptor"
+				class="wusc.edu.pay.web.permission.interceptor.OperatorLoginInterceptor"></interceptor>
+			<interceptor name="fileUpload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor">
+				<param name="maximumSize">20971520</param>
+				<param name="allowedTypes">
+					image/gif,image/png,image/bmp,image/pjpeg,image/jpg,image/jpeg
+				</param>
+			</interceptor>
+		</interceptors>
+		<global-results>
+			<result name="exception">page/common/error.jsp</result>
+			<result name="operateSuccess">page/common/operateSuccess.jsp</result>
+			<result name="operateError">page/common/operateError.jsp</result>
+			<result name="permissionError">page/common/permissionError.jsp</result>
+		</global-results>
+		<!-- 账户Action -->
+		<action name="typePn_*" class="com.upic.web.boss.action.ArticleAction"
+			method="{1}">
+			<result name="listTypePn">page/typePn/TypePnActionList.jsp</result>
+			<result name="readyArtic">page/typePn/TypePnArticEdit.jsp</result>
+			<result name="addArtic">page/typePn/TypePnArticAdd.jsp</result>
+			
+			<result name="readyCreateMeituByTypePn">page/typePn/TypePnByMeituAdd.jsp</result>
+			<result name="readyUpdateMeituTypePn">page/typePn/TypePnByMeituEdit.jsp</result>
+			
+			<result name="seeMeituDetials">page/typePn/MeituPnActionList.jsp</result>
+			<result name="readyCreateMeitu">page/typePn/MeituPnArticAdd.jsp</result>
+			<result name="readyUpdateMeitu">page/typePn/MeituPnArticEdit.jsp</result>
+		</action>
+	</package>
+
+</struts>

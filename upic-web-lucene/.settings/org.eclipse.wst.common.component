@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="upic-service-unit">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="upic-commom-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/upic-commom/upic-commom">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="upic-common-core-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/upic-common-core/upic-common-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="upic-common-config-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/upic-common-config/upic-common-config">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="upic-commom-web-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/upic-commom-web/upic-commom-web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="upic-facade-shop-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/upic-facade-shop/upic-facade-shop">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="upic-facade-store-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/upic-facade-store/upic-facade-store">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/upic-service-unit/target/classes"/>
+        <property name="context-root" value="upic-web-lucene"/>
+    </wb-module>
+</project-modules>

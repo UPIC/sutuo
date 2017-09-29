@@ -1,0 +1,27 @@
+
+       .am-icon-angle-left{margin-left: 5%;float: left;}
+       .new{ font-size:16px;  margin: 0 auto;}
+       hr{size:3; margin-top: 7px;}
+       .detail{ float: right; margin-right: 3%; font-size: 16px;}
+body{
+margin: 0;
+padding: 0;
+background-color: #eeeeee;
+height: 600px;
+}
+
+.one{
+  text-align: center;
+  height: 40px;
+  padding-top: 7px;
+  background-color: white;
+}  
+.on{width: 130px; padding-top: 15px;}
+ .two{ height: 65px; margin-bottom:15px; margin-top: -10px; }
+ .zero{ font-size: 40px; width: 30px; margin-left: 50%; margin-top:-65px; vertical-align: bottom;}
+ .am-icon-yen{ padding-top:10px;line-height: 65px; margin-left:44%;}
+ .bottom{ position: fixed; bottom: 0; margin-left: 10%; font-size: 14px; margin-bottom: 20px;}
+ .bott{ margin-bottom: 10px;}
+ .lik{ width:90%; height: 50px; background-color: #CAA163; text-align: center; border-radius: 50px; margin: 0 10px 0px 0; margin-left: 5%;}
+ .lik a{text-decoration: none; display: block; padding:10px; color:white;}
+ 

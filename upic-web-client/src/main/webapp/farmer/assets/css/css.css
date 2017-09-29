@@ -1,0 +1,24 @@
+  *{
+            padding:0px;
+            margin:0px
+        }
+        div{
+            background:white;
+           
+        }
+       fieldset{
+           margin:0px !important;
+           padding-bottom:0px;
+           
+       }
+       form{
+           margin:0px;
+           padding:0px;
+           width:100%;
+       }
+       .am-u-sm-10 {
+    width: 73.33333333%;
+}
+       placeholder{
+           font-size:0.8rem
+       }

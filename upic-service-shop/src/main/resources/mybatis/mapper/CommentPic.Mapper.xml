@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.CommentPicDao">
+
+	<!-- 用户信息表 -->
+	<sql id="commentPic"> T_COMMENT_PIC </sql>
+	<resultMap id="beanMap" type="CommentPic">
+		<id column="COMMENT_PIC_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="CLASS_ID" property="classId" />
+		<result column="CLASS_TYPE" property="classType" />
+		<result column="PIC_URL" property="picUrl" />
+		<result column="PIC_NUM" property="picNum" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="CommentPic" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="commentPic" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		PIC_URL,PIC_NUM,CLASS_ID,CLASS_TYPE)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{picUrl},#{picNum},#{classId},#{classType})
+	</insert>
+
+	<update id="update" parameterType="CommentPic">
+		update
+		<include refid="commentPic" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			PIC_URL=#{picUrl},
+			PIC_NUM=#{picNum},
+			CLASS_ID=#{classId},
+			CLASS_TYPE=#{classType}
+		</set>
+		<where>
+			COMMENT_PIC_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="commentPic" />
+		where COMMENT_PIC_ID = #{id}
+	</select>
+	<select id="listBy" resultMap="beanMap">
+		select * from
+		<include refid="commentPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by COMMENT_PIC_ID
+	</select>
+	
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="commentPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by COMMENT_PIC_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="commentPic" />
+		where COMMENT_PIC_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="classId != null and classId != ''"> and CLASS_ID
+			= #{classId}
+		</if>
+		<if test="picNum != null and picNum != ''"> and PIC_NUM
+			= #{picNum}
+		</if>
+		<if test="picUrl != null and picUrl != ''"> and PIC_URL
+			= #{picUrl}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="commentPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by COMMENT_PIC_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="commentPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

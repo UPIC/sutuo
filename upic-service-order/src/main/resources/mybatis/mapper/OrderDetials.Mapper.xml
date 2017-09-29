@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.OrderDetialsDao">
+
+	<!-- 用户信息表 -->
+	<sql id="orderDetials"> T_ORDER_DETIALS </sql>
+	<sql id="address"> T_ADDRESS </sql>
+	<resultMap id="beanMap" type="OrderDetials">
+		<result column="ORDER_DETIALS_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="PRICE" property="price" />
+		<result column="SHOP_COUNT" property="shopCount" />
+		<result column="SHOP_NAME" property="shopName" />
+		<result column="SHOP_TYPE" property="shopType" />
+		<result column="T_SHOP_NUMBER" property="shopNumber" />
+		<result column="ORDER_ID" property="orderId" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="OrderDetials">
+		insert into
+		<include refid="orderDetials" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		PRICE,SHOP_COUNT,SHOP_NAME, SHOP_TYPE,T_SHOP_NUMBER,ORDER_ID)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{price},#{shopCount},#{shopName},
+		 #{shopType},#{shopNumber},#{orderId})
+	</insert>
+
+	<update id="update" parameterType="OrderDetials">
+		update
+		<include refid="orderDetials" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			PRICE=#{price},
+			SHOP_COUNT=#{shopCount},
+			SHOP_NAME=#{shopName},
+			SHOP_TYPE=#{shopType},
+			T_SHOP_NUMBER=#{shopNumber},
+			ORDER_ID=#{orderId}
+		</set>
+		<where>
+			ORDER_DETIALS_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="orderDetials" />
+		where ORDER_DETIALS_ID = #{id}
+	</select>
+	<select id="getByOrderId" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="orderDetials" />
+		where ORDER_ID = #{orderId}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="orderDetials" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="orderDetials" />
+		where ORDER_DETIALS_ID = #{id}
+	</delete>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="orderDetials" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by CREATETIME desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="orderDetials" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	<sql id="condition_sql">
+		
+	</sql>
+	<resultMap id="beanMapExpress" type="com.upic.po.Express">
+		<result column="ORDER_ID" property="orderId" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="DELIVERY_STATUS" property="deliveryStatus" />
+		<result column="ADDRESS_DETILS" property="addressDetils" />
+		<result column="T_ZIP_CODE" property="zipCode" />
+		<result column="PROVINCE_NAME" property="provinceName" />
+		<result column="CITY_NAME" property="cityName" />
+		<result column="DISTRICT_NAME" property="districtName" />
+		<result column="RECIPIENTS_NAME" property="recipentsName" />
+		<result column="COURIER_NUMBER" property="courierNumber" />
+		<result column="CONFIRM_RECEIPT" property="confirmReceipt" />
+	</resultMap>
+	<sql id="condition_sql_Express">
+		<if test="courierNumber != null and courierNumber != '' ">
+			and
+			<include refid="orderDetials" />
+			.COURIER_NUMBER = #{courierNumber,jdbcType=VARCHAR}
+		</if>
+		<if test="orderId != null and orderId != '' ">
+			and
+			<include refid="orderDetials" />
+			.ORDER_ID = #{orderId,jdbcType=VARCHAR}
+		</if>
+		<if test="deliveryStatus != null and deliveryStatus != '' ">
+			and
+			<include refid="orderDetials" />
+			.DELIVERY_STATUS = #{deliveryStatus}
+		</if>
+		<if test="orderDateBegin != null and orderDateBegin != '' ">
+			and
+			<include refid="orderDetials" />.ORDER_SUCCESS <![CDATA[ >= ]]>
+			#{orderDateBegin,jdbcType=VARCHAR}
+		</if>
+		<if test="orderDateEnd != null and orderDateEnd != '' ">
+			and
+			<include refid="orderDetials" />.ORDER_SUCCESS <![CDATA[ <= ]]>
+			#{orderDateEnd,jdbcType=VARCHAR}
+		</if>
+		<if test="shopName != null and shopName != '' ">
+			and
+			<include refid="orderDetials" />
+			.SHOP_NAME = #{shopName,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<select id="listPageExpress" parameterType="java.util.Map"
+		resultMap="beanMapExpress">
+		select * from
+		<include refid="orderDetials" />
+		,
+		<include refid="address" />
+		<where>
+			<include refid="condition_sql_Express" />
+			and
+			<include refid="orderDetials" />
+			.T_ADDRESS_ID =
+			<include refid="address" />
+			.ADDRESS_ID
+			and
+			<include refid="orderDetials" />
+			.STATUS=#{status}
+		</where>
+		order by
+		<include refid="orderDetials" />
+		.ORDER_SUCCESS asc
+	</select>
+</mapper>

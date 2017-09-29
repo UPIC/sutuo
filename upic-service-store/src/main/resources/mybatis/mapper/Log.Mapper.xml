@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.LogDao">
+
+	<!-- 用户信息表 -->
+	<sql id="log"> T_LOG </sql>
+	<resultMap id="beanMap" type="Log">
+		<id column="LOG_ID" property="id" />
+		<result column="STORE_NUMBER" property="storeNumber" />
+		<result column="LOG_NUMBER" property="logNumber" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="CONTENT" property="content" />
+		<result column="TITLE" property="title" />
+		<result column="ARTICNAME" property="articName" />
+		<result column="STORE_ID" property="storeId" />
+		<result column="PIC" property="pic" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Log" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="log" />
+		(VERSION,
+		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,CONTENT,STORE_ID,PIC
+		,LOG_NUMBER,TITLE,ARTICNAME)
+		values
+		(0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},
+		#{content},#{storeId},#{pic},#{logNumber},#{title},#{articName})
+	</insert>
+
+	<update id="update" parameterType="Log">
+		update
+		<include refid="log" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			CONTENT=#{content},
+			STORE_ID=#{storeId},
+			PIC=#{pic},
+			ARTICNAME=#{articName}
+		</set>
+		<where>
+			LOG_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="log" />
+		where LOG_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="log" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by LOG_ID
+	</select>
+	<select id="getBy" resultMap="beanMap">
+		select * from
+		<include refid="log" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	<select id="getByOnlyOne" resultMap="beanMap">
+		select * from
+		<include refid="log" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by LOG_ID DESC LIMIT 1
+	</select>
+	<select id="listBy" resultMap="beanMap">
+		select * from
+		<include refid="log" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by LOG_ID
+	</select>
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="log" />
+		where LOG_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="storeId != null and storeId != ''"> and STORE_ID
+			= #{storeId}
+		</if>
+		<if test="logNumber != null and logNumber != ''"> and LOG_NUMBER
+			= #{logNumber}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="log" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by LOG_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="Log">
+		select count(1) from
+		<include refid="log" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,221 @@
+        .am-form-field{
+           width:100% !important;
+           height:25px !important;
+           margin-top:12px;
+       } 
+       .am-btn-default{
+           height:25px !important;
+
+           margin-top:12px;
+       }
+       .logo{
+        width:35px !important;
+        height:35px !important;
+         margin-top:8px;
+         margin-left:10px;
+       }
+       .am-icon-search{
+           padding-bottom:2px
+       }
+       .am-btn{
+           padding:0px !important
+       }
+       .am-header-title{
+           margin-left:70px !important;
+           margin-right:60px !important;
+       }
+
+
+
+.box img{
+    width:100%;
+    height:190px;
+    
+}
+
+
+
+      a{
+          color:black
+      }
+
+      .am-active a{
+    
+    font-weight:bold;
+    font-size:16px;
+    color:red !important
+    
+}
+
+
+
+     .middle{
+        list-style:none;
+        padding-left:10px;
+        float:left;
+        height:74px;
+        width:20%;
+        text-align:center
+    }
+    .middle img{
+        width:30px;
+        height:30px
+    }
+    .text{
+        font-size:14px;
+        font-weight:bold
+    }
+   
+    
+.head{
+    height:70px
+}
+
+
+
+/*.body{
+    height:auto
+}
+     .pin{
+        text-align:center;
+        padding-top:30px
+    }
+     .pin img{
+         width:45px;
+         height:45px
+     }
+
+     .textbox{
+         text-align:center;
+         margin-top:10px;
+         font-size:16px;
+         font-weight:bold
+     }
+
+
+
+.am-gallery-item img{
+    
+    height:80px !important
+}
+
+.am-gallery{
+   margin-top:10px
+}
+.am-tabs-d2 .am-active a{
+    color:black !important;
+    font-size:14px !important;
+    line-height:35px !important;
+    
+}
+.am-tabs-d2 li a{
+    font-size:14px !important;
+    line-height:35px !important;
+    
+}
+.am-tabs-d2 .pinli {
+    height: 35px !important;
+}
+.am-tabs-bd{
+    border:0 !important
+}
+
+.am-slides img{
+   height:90px !important;
+   width:98% !important;
+   margin-top:10px
+}
+
+
+#tabs{
+    margin-top:20px !important
+}
+.am-tabs-nav .am-active a{
+    background-color:white !important
+}
+
+.am-tabs-nav li{
+    height:30px !important;
+    
+}
+.am-tabs-nav li a{
+    line-height:30px !important;
+   
+}
+
+.am-slides span{
+    font-size:14px;
+    color:black;
+    margin-left:10px
+}
+.am-slider-default .am-control-nav li a{
+    width:0 !important
+}*/
+
+
+.one{
+    width:100%
+}
+.tital{
+    width:100%;
+    height:30px
+}
+.left{
+    float:left;
+    margin-left:10px;
+    font-size:16px;
+    font-weight:bold
+}
+.am-icon-newspaper-o{
+    color:red
+}
+.right{
+    float:right;
+    margin-right:10px;
+}
+.main{
+    width:100%;
+    margin-left:5px
+}
+
+.main li{
+    width:33%;
+    float:left;
+    list-style:none;
+}
+
+.main li img{
+    width:95%;
+    height:100px
+}
+.main li .txt1{
+    width:90%;
+    font-size:14px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden
+}
+.two{
+    margin-top:20px
+}
+.main2{
+    width:100%;
+    margin-left:5px
+}
+.main2 li{
+    width:50%;
+    float:left;
+    list-style:none
+}
+.main2 li img{
+    width:95%;
+    height:100px
+}
+.main2 li .txt{
+    width:90%;
+    font-size:14px;
+    padding-bottom:10px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden
+}

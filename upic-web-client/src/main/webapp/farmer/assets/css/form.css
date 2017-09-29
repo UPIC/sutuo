@@ -1,0 +1,54 @@
+﻿.am-icon-arrow-left{
+   color:black
+}
+.am-navbar-label{
+    color:gray
+}
+.edit2{
+    padding-right:10px;
+    float:right;
+    color:red
+}
+.part1{
+    height:40px;
+    line-height:40px
+   
+}
+.picture{
+    width:100px;
+    height:100px;
+    padding-bottom:8px
+}
+.number{
+    float:right;
+    color:red;
+    padding-right:5px
+}
+.tr{
+    margin-bottom:10px
+}
+.td2{
+  padding-top:10px;
+  padding-left:5px
+}
+.td3{
+     vertical-align:top;
+     padding-top:5px;
+  padding-left:5px
+}
+table{
+    background-color:lightgrey
+}
+.bb{
+    float:right
+}
+.cc{
+    height:30px;
+    line-height:30px
+}
+.am-btn{
+    float:right;
+    margin-right:10px;
+    margin-bottom:10px;
+    
+}

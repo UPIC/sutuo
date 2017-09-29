@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.StorePicDao">
+
+	<!-- 用户信息表 -->
+	<sql id="storePic"> T_STORE_PIC </sql>
+	<resultMap id="beanMap" type="StorePic">
+		<id column="STORE_PIC_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="URL" property="url" />
+		<result column="STORE_NUM" property="storeNum" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="StorePic" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="storePic" />
+		(VERSION,
+		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,USERNAME,PASSWORD,STORENAME,MAINSHOPS,ADDRESS_ID,DETAIL_ADDRESS,COMPANY_NAME,PHONE,STATUS,ISAGREE,TYPE,STORE_BRIEF,LINKMAN_QQ)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{userName},#{passWord},#{storeName},#{mainShops},#{addressId},#{detailAddress},#{companyName},#{phone},#{status},#{isAgree},#{type},#{storeBrief},#{linkmanQQ})
+	</insert>
+
+	<update id="update" parameterType="StorePic">
+		update
+		<include refid="storePic" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			USERNAME=#{userName},
+			PASSWORD=#{passWord},
+			STORENAME=#{storeName},
+			MAINSHOPS=#{mainShops},
+			ADDRESS_ID=#{addressId},
+			DETAIL_ADDRESS=#{detailAddress},
+			COMPANY_NAME=#{companyName},
+			PHONE=#{phone},
+			STATUS=#{status},
+			ISAGREE=#{isAgree},
+			TYPE=#{type},
+			STORE_BRIEF=#{storeBrief},
+			LINKMAN_QQ=#{linkmanQQ}
+		</set>
+		<where>
+			STORE_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="storePic" />
+		where STORE_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="storePic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STORE_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="storePic" />
+		where STORE_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="url != null and url != ''"> and URL
+			= #{url}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="storePic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STORE_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="storePic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

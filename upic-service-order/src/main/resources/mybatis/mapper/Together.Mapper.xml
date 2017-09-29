@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.TogetherDao">
+
+	<!-- 用户信息表 -->
+	<sql id="together"> T_TOGETHER </sql>
+	<resultMap id="beanMap" type="Together">
+		<result column="TOGETHER_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="TOGETHER_NUMBER" property="togetherNumber" />
+		<result column="ORDER_ID" property="orderId" />
+		<result column="SHOP_NAME" property="shopName" />
+		<result column="STORE_NAME" property="storeName" />
+		<result column="SHOP_PRICE" property="shopPrice" />
+		<result column="SHOP_COUNT" property="num" />
+		<result column="URL" property="pic" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Together">
+		insert into
+		<include refid="together" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		TOGETHER_NUMBER,
+		ORDER_ID,SHOP_NAME,STORE_NAME,SHOP_PRICE, SHOP_COUNT,PIC)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{togetherNumber},#{orderId},#{shopName},#{storeName},
+		 #{shopPrice},
+		 #{num},
+		 #{pic})
+	</insert>
+
+	<update id="update" parameterType="Together">
+		update
+		<include refid="together" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			TOGETHER_NUMBER=#{togetherNumber},
+			ORDER_ID=#{orderId},
+			SHOP_NAME=#{shopName},
+			STORE_NAME=#{storeName},
+			SHOP_PRICE=#{shopPrice},
+			SHOP_COUNT=#{num},
+			PIC=#{pic}
+		</set>
+		<where>
+			TOGETHER_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="together" />
+		where TOGETHER_ID = #{id}
+	</select>
+	<select id="getByOrderId" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="together" />
+		where ORDER_ID = #{orderId}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="together" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="together" />
+		where TOGETHER_ID = #{id}
+	</delete>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="together" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by CREATETIME desc
+	</select>
+	<select id="listAllTogether" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		
+		<include refid="together" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by CREATETIME desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="together" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="orderId != null and orderId != ''"> and ORDER_ID
+			= #{orderId}
+		</if>
+		<if test="shopName != null and shopName != ''"> and SHOP_NAME
+			= #{shopName}
+		</if>
+		<if test="userId != null and userId != ''"> and USER_ID
+			= #{userId}
+		</if>
+	</sql>
+</mapper>

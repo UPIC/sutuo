@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.MainPicDao">
+
+	<!-- 用户信息表 -->
+	<sql id="mainPic"> T_MAIN_PIC </sql>
+	<resultMap id="beanMap" type="MainPic">
+		<id column="MAIN_PIC_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="URL" property="url" />
+		<result column="PIC_NUMBER" property="picNumber" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+		<result column="PIC_TYPE" property="picType" />
+		<result column="FORWORD_TYPE" property="forwordType" />
+		<result column="FORWORD_ID" property="forwordId" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+
+	<insert id="insert" parameterType="MainPic" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="mainPic" />
+		(VERSION,
+		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,URL,PIC_NUMBER,PIC_TYPE,FORWORD_TYPE,FORWORD_ID,STATUS)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{url},#{picNumber},#{picType},#{forwordType},#{forwordId},101)
+	</insert>
+
+	<update id="update" parameterType="MainPic">
+		update
+		<include refid="mainPic" />
+		<set>
+			version = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			URL=#{url},
+			PIC_NUMBER=#{picNumber},
+			PIC_TYPE=#{picType},
+			FORWORD_TYPE=#{forwordType},
+			FORWORD_ID=#{forwordId},
+			STATUS=#{status}
+		</set>
+		<where>
+			MAIN_PIC_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="mainPic" />
+		where MAIN_PIC_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="mainPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by MAIN_PIC_ID
+	</select>
+	<select id="listBy" resultMap="beanMap">
+		select * from
+		<include refid="mainPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by MAIN_PIC_ID
+	</select>
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="mainPic" />
+		where MAIN_PIC_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="url != null and url != ''"> and URL
+			= #{url}
+		</if>
+		<if test="status != null and status != ''"> and STATUS
+			= #{status}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="mainPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by MAIN_PIC_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="mainPic" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+</mapper>

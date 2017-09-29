@@ -1,0 +1,96 @@
+﻿*{
+	margin:0;
+	padding: 0;
+}
+.am-form-group {
+    margin-left: 10px;
+    margin-top: 5px;
+	border:0;
+	float: left;
+	width: 80% !important;
+}
+.am-form-group input{
+	border:0;
+}
+.am-form-field{
+	border:0 !important;
+	background: #E5E5E5 !important;
+	height: 35px;
+    
+}
+.cal{
+    margin-top: 5px;
+    float: right;
+    line-height: 30px;
+    margin-right: 10px;	
+}
+.span-one{
+	float: left;
+}
+.line-one{
+	height: 30px;
+	font-size: 14px;
+	margin-left: 10px;
+}
+.span-two{
+	float: right;
+}
+#histroy{
+	padding:5px;
+}
+.histroy-search{
+	position: absolute;
+	padding-right: 10%;
+	margin-top: 0px;
+}
+.histroy-search span{
+	font-size: 10px;
+	background: #F5F5F5;
+	border-radius: 5px;
+	padding: 2px 10px;
+	margin: 5px;
+	display: inline-block;
+}
+#sear{
+	margin-top:80px;
+	padding:5px;
+}
+.line-two{
+	height: 30px;
+	font-size: 14px;
+	margin-left: 10px;
+	margin-top: 10px !important;
+}
+a{
+	color: #333333;
+}
+a:hover{
+	color: #333333;
+}
+.clear{
+	clear: both;
+}
+.am-form-group{
+	margin-bottom: 0.5rem !important;
+}
+.am-icon-remove{
+   padding-left:90%
+}
+li{
+    width:100%;
+    list-style:none;
+    height:40px;
+    padding-top:10px;
+    border-bottom:1px solid whitesmoke
+}
+li .am-icon-search{
+    color:lightgray;
+    margin-left:10px
+}
+.right{
+    float:right;
+    margin-right:10px;
+    color:lightgray;
+    font-size:12px;
+    margin-top:5px
+}

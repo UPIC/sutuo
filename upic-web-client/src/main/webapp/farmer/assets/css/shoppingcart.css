@@ -1,0 +1,71 @@
+﻿
+
+.am-header{
+    background-color:gainsboro
+}
+.edit{
+    padding-right:15px;
+    color:black
+}
+.am-icon-commenting-o{
+    color:black
+}
+.am-icon-circle-thin{
+    padding-left:10px
+}
+.am-icon-university{
+    padding-left:10px
+}
+.edit2{
+    padding-right:10px;
+    float:right
+}
+.part1{
+    height:20%;
+   
+}
+.picture{
+    width:100px;
+    height:100px
+}
+.number{
+    float:right;
+    color:red;
+    padding-right:5px
+}
+.tr{
+    margin-bottom:10px
+}
+.td2{
+  padding-top:10px;
+  padding-left:5px
+}
+.td3{
+     vertical-align:top;
+     padding-top:5px;
+  padding-left:5px
+}
+.am-navbar-label{
+    color:gray
+}
+#div{
+    height:100px
+}
+li{
+    line-height:40px;
+    vertical-align:center;
+}
+.aa{
+    padding-top:12px;
+    line-height:40px;
+    float:left;
+    width:25px !important;
+     
+}
+.fll{
+    float:left;
+}
+.flr{
+    float:left;
+}
+

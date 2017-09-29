@@ -1,0 +1,37 @@
+
+       .am-icon-angle-left{margin-left: 5%;float: left;}
+       .new{ font-size:16px;  margin: 0 auto;}
+       hr{size:3; margin-top: 7px;}
+  
+body{
+margin: 0;
+padding: 0;
+background-color: white;
+height: 600px;
+}
+
+.one{
+  text-align: center;
+  height: 40px;
+  padding-top: 7px;
+  background-color: white;
+}  
+.bg{ width: 100%; background-color: #1E1C1D; height: 180px;float: left;color: #C8B48E; text-align: center;padding-top: 30px; z-index: 2000;}
+.top-img{
+  margin-top: -50px;
+  z-index: 1;
+}
+.writ{ height:20px;color: white;padding-top: 40px; z-index: 2000000 !important; margin-top: -80px; text-align: center;font-size: 14px;}
+ #lin{ position:fixed;left:0; bottom:0; width:90%; height: 50px; background-color: white; text-align: center; border-radius: 10px; margin: 0 10px 0px 0; margin-left: 5%; border:#C8B48E 1px solid; margin-bottom: 20px;}
+ #lin a{text-decoration: none; padding:10px; color:#C8B48E;}
+ .ma{text-align: center;font-size: 14px; margin-top: 25%;}
+ .mb{font-size: 30px;text-align: center; text-decoration: underline;margin-top: -6px; margin-bottom: 20px;}
+.mc,.md{text-align: center;font-size: 14px; }
+.animal{ width: 30px; margin-left: -80%;}
+.ac{ border-radius: 10px; width: 70%; height: 5px; background-color:#5F5D5E; margin-left: 16%; margin-top:-20px;}
+.observe{width: 30px; margin-left: 83%;  margin-top:-90px;}
+.an{ margin-top: 15px;}
+.ad{ font-size: 13px; color: #B6B4B5;position: relative; text-align: center;margin-top: 10px;}
+li{list-style:none;}
+.am-navbar-label{ line-height: 20px;}
+

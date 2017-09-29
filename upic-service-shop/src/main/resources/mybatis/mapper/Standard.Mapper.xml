@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.StandardDao">
+
+	<!-- 用户信息表 -->
+	<sql id="standard"> T_STANDARD </sql>
+	<resultMap id="beanMap" type="Standard">
+		<id column="STANDARD_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="STANDARD_TYPE_FIRST" property="standardTypeFirst" />
+		<result column="STANDARD_FIRST" property="standardFirst" />
+		<result column="STANDARD_TYPE_SECOND" property="standardTypeSecond" />
+		<result column="STANDARD_SECOND" property="standardSecond" />
+		<result column="STANDARD_TYPE_THIRD" property="standardTypeThird" />
+		<result column="STANDARD_THIRD" property="standardThird" />
+		<result column="PRICE" property="price" />
+		<result column="COUNT" property="count" />
+		<result column="SHOP_ID" property="shopId" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Standard" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="standard" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		STANDARD_TYPE_FIRST,STANDARD_FIRST,STANDARD_TYPE_SECOND,STANDARD_SECOND,STANDARD_TYPE_THIRD,STANDARD_THIRD,PRICE,COUNT
+		,SHOP_ID)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{standardTypeFirst},#{standardFirst},#{standardTypeSecond},#{standardSecond},#{standardTypeThird},#{standardThird})
+	</insert>
+
+	<update id="update" parameterType="Standard">
+		update
+		<include refid="standard" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			STANDARD_TYPE_FIRST=#{standardTypeFirst},
+			STANDARD_FIRST=#{standardFirst},
+			STANDARD_TYPE_SECOND=#{standardTypeSecond},
+			STANDARD_SECOND=#{standardSecond},
+			STANDARD_TYPE_THIRD=#{standardTypeThird},
+			STANDARD_THIRD=#{standardThird},
+			PRICE=#{price},
+			COUNT=#{count},
+			SHOP_ID=#{shopId}
+		</set>
+		<where>
+			STANDARD_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="standard" />
+		where STANDARD_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="standard" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STANDARD_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="standard" />
+		where STANDARD_ID = #{id}
+	</delete>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="standard" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STANDARD_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="standard" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+	
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="standardTypeFirst != null and standardTypeFirst != ''"> and STANDARD_TYPE_FIRST
+			= #{standardTypeFirst}
+		</if>
+		<if test="standardFirst != null and standardFirst != ''"> and STANDARD_FIRST
+			= #{standardFirst}
+		</if>
+		<if test="standardTypeSecond != null and standardTypeSecond != ''"> and STANDARD_TYPE_SECOND
+			= #{standardTypeSecond}
+		</if>
+		<if test="standardSecond != null and standardSecond != ''"> and STANDARD_SECOND
+			= #{standardSecond}
+		</if>
+		<if test="standardTypeThird != null and standardTypeThird != ''"> and STANDARD_TYPE_THIRD
+			= #{standardTypeThird}
+		</if>
+		<if test="standardThird != null and standardThird != ''"> and STANDARD_THIRD
+			= #{standardThird}
+		</if>
+		<if test="shopId != null and shopId != ''"> and SHOP_ID
+			= #{shopId}
+		</if>
+	</sql>
+
+</mapper>

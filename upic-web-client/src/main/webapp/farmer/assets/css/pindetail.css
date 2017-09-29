@@ -1,0 +1,89 @@
+﻿body{
+    background-color:black !important
+}
+.am-icon-chevron-left{
+    color:white
+}
+.am-slider-default{
+    margin-top:120px
+}
+.am-slider-default img{
+    height:200px !important
+}
+.am-slider-default .am-control-nav li a {
+    width:0 !important
+}
+li{
+    background-color:black
+}
+
+.tatil{
+    width:100%;
+    height:50px;
+    color:white;
+    font-size:18px
+}
+.tatil .left{
+    float:left;
+    margin-left:5px
+}
+.tatil .right{
+    float:right;
+     margin-right:5px
+}
+.tatil .right span{
+    font-size:22px
+}
+
+.txt{
+    color:white;
+    font-size:14px;
+    margin-left:5px;
+    background-color:black;
+    border:black
+}
+.foot {
+    width: 100%;
+    margin-top: 20px;
+}
+.zuo{
+    width:45%;
+    padding-left:10px;
+    float:left
+}
+.zuo input{
+    height:30px;
+    border-radius:10px;
+    background-color:dimgrey
+}
+.you{
+    float:right;
+    width:40%
+}
+.you li{
+    float:left;
+     list-style:none;
+     width:30%
+}
+.you img{
+    width:20px;
+    height:20px;
+    margin-top:10px
+   
+}
+
+ul{
+  background-color:black;
+  border:black
+}
+li{
+   border:black !important
+}
+ol{
+ background-color:black;
+
+}
+.am-slider-default .am-control-nav{
+    bottom:-50px !important;
+    background-color:black
+}

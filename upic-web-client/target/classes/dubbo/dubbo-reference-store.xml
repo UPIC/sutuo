@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:reference interface="com.upic.service.IStoreService"
+		id="storeService" check="false" />
+	<dubbo:reference interface="com.upic.service.ILogService"
+		id="logService" check="false" />
+	<dubbo:reference interface="com.upic.service.IStorePicService"
+		id="storePicService" check="false" />
+	<dubbo:reference interface="com.upic.service.IStoreSignService"
+		id="storeSignService" check="false" />
+	<dubbo:reference interface="com.upic.service.IStoreSignLinkService"
+		id="storeSignLinkService" check="false" />
+	<dubbo:reference interface="com.upic.service.IProjectStoreService"
+		id="projectStoreService" check="false" />
+	<dubbo:reference interface="com.upic.service.IThemetzStoreService"
+		id="themetzStoreService" check="false" />
+	<dubbo:reference interface="com.upic.service.IStoreCollectionService"
+		id="storeCollectionService" check="false" />
+	<dubbo:reference interface="com.upic.service.ILogCommentService"
+		id="logCommentService" check="false" />	
+		
+		
+	<dubbo:reference interface="com.upic.service.IStoreFarmService"
+		id="storeFarmService" check="false" />		
+</beans>  

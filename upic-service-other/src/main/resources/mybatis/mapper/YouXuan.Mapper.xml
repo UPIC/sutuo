@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.YouXuanDao">
+
+	<!-- 用户信息表 -->
+	<sql id="youXuan"> T_YOU_XUAN </sql>
+	<sql id="shop"> T_SHOP </sql>
+	<resultMap id="beanMap" type="YouXuan">
+		<id column="YOU_XUAN_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="CITY" property="city" />
+		<result column="SHOP_NUMBER" property="shopNumber" />
+		<result column="STORE_NUMBER" property="storeNumber" />
+		<result column="SHOP_NAME" property="shopName" />
+		<result column="SHOP_PRICE" property="price" />
+		<result column="HEAD_PIC" property="pic" />
+		<result column="STORE_NAME" property="storeName" />
+		<result column="SHOP_ID" property="shopId" />
+		<result column="STORE_ID" property="storeId" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+		<result column="NUM" property="num" />
+		<result column="Y_STATUS" property="you_Status" />
+		<result column="STATUS" property="sStatus" />
+		<result column="AVG_COST" property="peopleNum" />
+		<result column="PROVINCE_NAME" property="provinceName" />
+		<result column="DISTRICT_NAME" property="districtName" />
+		<result column="TYPE" property="type" />
+		<result column="MODULE_LIST_ID" property="moduleListId" />
+	</resultMap>
+
+	<insert id="insert" parameterType="YouXuan" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="youXuan" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		SHOP_ID,STORE_ID,CITY,SHOP_NUMBER,SHOP_NAME,
+		STORE_NUMBER,STORE_NAME,NUM,Y_STATUS,PROVINCE_NAME,DISTRICT_NAME,TYPE,MODULE_LIST_ID)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{shopId},#{storeId}
+		,#{city},#{shopNumber},#{shopName},#{storeNumber},#{storeName},#{num},100,
+		#{provinceName},#{districtName},
+		#{type},#{moduleListId})
+	</insert>
+
+	<update id="update" parameterType="YouXuan">
+		update
+		<include refid="youXuan" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			SHOP_ID=#{shopId},
+			STORE_ID=#{storeId},
+			CITY=#{city},
+			SHOP_NUMBER=#{shopNumber},
+			SHOP_NAME=#{shopName},
+			STORE_NUMBER=#{storeNumber},
+			STORE_NAME=#{storeName},
+			NUM=#{num},
+			Y_STATUS=#{you_Status},
+			PROVINCE_NAME=#{provinceName},
+			DISTRICT_NAME=#{districtName},
+			TYPE=#{type},
+			MODULE_LIST_ID=#{moduleListId}
+		</set>
+		<where>
+			YOU_XUAN_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="youXuan" />
+		a,
+		<include refid="shop" />
+		b
+		<where>
+			 a.SHOP_ID = b.SHOP_ID
+			and a.YOU_XUAN_ID = #{id}
+		</where>
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="youXuan" />
+		a,
+		<include refid="shop" />
+		b
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by a.YOU_XUAN_ID
+	</select>
+
+	<select id="listBy" resultMap="beanMap">
+		select * from
+		<include refid="youXuan" />
+		a,
+		<include refid="shop" />
+		b
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by a.YOU_XUAN_ID
+	</select>
+	<select id="findObjectByShopId" resultMap="beanMap">
+		select * from
+		<include refid="youXuan" />
+		a,
+		<include refid="shop" />
+		b
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="youXuan" />
+		where YOU_XUAN_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		and a.SHOP_ID = b.SHOP_ID
+		<if test="city != null and city != ''"> and a.CITY
+			= #{city}
+		</if>
+		<if test="provinceName != null and provinceName != ''"> and a.PROVINCE_NAME
+			= #{provinceName}
+		</if>
+		<if test="districtName != null and districtName != ''"> and a.DISTRICT_NAME
+			= #{districtName}
+		</if>
+		<if test="shopNumber != null and shopNumber != ''">
+			and a.SHOP_NUMBER like
+			CONCAT(CONCAT('%',
+			#{shopNumber,jdbcType=VARCHAR}), '%')
+		</if>
+		<if test="shopName != null and shopName != ''">
+			and a.SHOP_NAME like
+			CONCAT(CONCAT('%',
+			#{shopName,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test="storeNumber != null and storeNumber != ''">
+			and a.STORE_NUMBER like
+			CONCAT(CONCAT('%',
+			#{storeNumber,jdbcType=VARCHAR}), '%')
+		</if>
+		<if test="storeName != null and storeName != ''">
+			and a.STORE_NAME like
+			CONCAT(CONCAT('%',
+			#{storeName,jdbcType=VARCHAR}),
+			'%')
+		</if>
+		<if test="num != null and num != ''"> and a.NUM
+			= #{num}
+		</if>
+		<if test="type != null and type != ''"> and TYPE
+			= #{type}
+		</if>
+		<if test="moduleListId != null and moduleListId != ''"> and MODULE_LIST_ID
+			= #{moduleListId}
+		</if>
+		<if test="you_Status != null and you_Status != '' and you_Status != 0"> and a.Y_STATUS
+			= #{you_Status}
+		</if>
+		<if test="orderDateBegin != null and orderDateBegin != '' ">
+			and CREATETIME <![CDATA[ >= ]]>
+			#{orderDateBegin,jdbcType=VARCHAR}
+		</if>
+		<if test="orderDateEnd != null and orderDateEnd != '' ">
+			and CREATETIME <![CDATA[ <= ]]>
+			#{orderDateEnd,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="youXuan" />
+		a,
+		<include refid="shop" />
+		b
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by YOU_XUAN_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="youXuan" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

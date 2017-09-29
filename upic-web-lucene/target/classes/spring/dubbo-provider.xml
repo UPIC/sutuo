@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://code.alibabatech.com/schema/dubbo  
+            http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="upic-service-user" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20888" />
+
+	<!-- 用户服务接口 -->
+	<dubbo:reference interface="com.upic.service.IShopService"
+		id="shopService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopPicService"
+		id="shopPicService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopTypeService"
+		id="shopTypeService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopSignLinkService"
+		id="shopSignLinkService" check="false" />
+	<dubbo:reference interface="com.upic.service.ICommentService"
+		id="commentService" check="false" />
+	<dubbo:reference interface="com.upic.service.IAnnouncementService"
+		id="announcementService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopThemeService"
+		id="shopThemeService" check="false" />
+	<dubbo:reference interface="com.upic.service.IStoreService"
+		id="storeService" check="false" />
+	<dubbo:reference interface="com.upic.service.IProjectShopService"
+		id="projectShopService" check="false" />
+	<dubbo:reference interface="com.upic.service.IThemetzShopService"
+		id="themetzShopService" check="false" />
+	<dubbo:reference interface="com.upic.service.IFirstTypeService"
+		id="firstTypeService" check="false" />
+	<dubbo:reference interface="com.upic.service.IThemetzStoreService"
+		id="themetzStoreService" check="false" />
+	<dubbo:reference interface="com.upic.service.IShopLogService"
+		id="shopLogService" check="false" />
+</beans>  

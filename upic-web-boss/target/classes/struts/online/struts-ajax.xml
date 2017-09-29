@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="AjaxAction" extends="base">
+		<!-- 账户Action -->
+		<action name="ajax_*" class="com.upic.web.boss.action.AjaxAction" method="{1}">
+		 <!-- 返回json类型数据 -->
+		 <!-- result是action中设置的变量名，也是页面需要返回的数据，该变量必须有setter和getter方法 -->
+	            <result type="json">
+	                <param name="root">result</param>
+	            </result>
+		</action>
+	</package>
+
+</struts>

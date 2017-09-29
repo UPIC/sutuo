@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.MeituPnDao">
+
+	<!-- 用户信息表 -->
+	<sql id="meituPn"> T_MEITU_PN </sql>
+	<resultMap id="beanMap" type="MeituPn">
+		<id column="MEITU_PN_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="CONTENT" property="content" />
+		<result column="PIC" property="pic" />
+		<result column="USER_ID" property="userId" />
+		<result column="PAGE_VIEW" property="pageView" />
+		<result column="TITLE" property="title" />
+		<result column="NUM" property="num" />
+		<result column="FATHERID" property="fatherId" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+
+		<result column="TITLE" property="title" />
+		<result column="PIC" property="pic" />
+		<result column="FATHERNUMBER" property="fatherNumber" />
+		<result column="ARTICAL_NAME" property="articName" />
+	</resultMap>
+
+	<insert id="insert" parameterType="MeituPn" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="meituPn" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		CONTENT,
+		USER_ID, PAGE_VIEW, 
+		NUM,FATHERID,TITLE,PIC,ARTICAL_NAME,FATHERNUMBER)
+		values (0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{content}
+		,#{userId},#{pageView}
+		,#{num},#{fatherId},#{title},#{pic},#{articName},#{fatherNumber})
+	</insert>
+
+	<update id="update" parameterType="MeituPn">
+		update
+		<include refid="meituPn" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			CONTENT=#{content},
+			PIC=#{pic},
+
+			USER_ID=#{userId},
+			PAGE_VIEW=#{pageView},
+			TITLE=#{title},
+
+			NUM=#{num}
+		</set>
+		<where>
+			MEITU_PN_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="meituPn" />
+		where MEITU_PN_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="meituPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by MEITU_PN_ID
+	</select>
+	<select id="listBy" resultMap="beanMap">
+		select * from
+		<include refid="meituPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by MEITU_PN_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="meituPn" />
+		where MEITU_PN_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="meituPn != null and meituPn != ''"> and MEITU_PN
+			= #{meituPn}
+		</if>
+		<if test="title != null and title != ''"> and TITLE
+			= #{title}
+		</if>
+
+		<if test="userId != null and userId != ''"> and USER_ID
+			= #{userId}
+		</if>
+		<if test="num != null and num != ''"> and NUM
+			= #{num}
+		</if>
+		<if test="fatherId != null and fatherId != ''"> and FATHERID
+			= #{fatherId}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="meituPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by MEITU_PN_ID desc
+	</select>
+	<delete id="deleteByFatherId" parameterType="long">
+		delete from
+		<include refid="meituPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</delete>
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="meituPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

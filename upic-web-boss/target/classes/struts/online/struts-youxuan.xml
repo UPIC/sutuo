@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="YouXuan" extends="base">
+		<!-- 账户Action -->
+		<action name="youxuan_*" class="com.upic.web.boss.action.YouXuanAction" method="{1}">
+		<result name="listYouXuan">page/youxuan/youXuanActionList.jsp</result>
+		<result name="youXuanDetials">page/youxuan/youXuanEdit.jsp</result>
+		<result name="readyAdd">page/youxuan/youXuanAdd.jsp</result>
+		</action>
+	</package>
+
+</struts>

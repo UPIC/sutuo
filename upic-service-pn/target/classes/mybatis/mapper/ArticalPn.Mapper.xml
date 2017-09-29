@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.ArticalPnDao">
+
+	<!-- 用户信息表 -->
+	<sql id="articalPn"> T_ARTICAL_PN </sql>
+	<resultMap id="beanMap" type="ArticalPn">
+		<id column="ARTICAL_PN_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="CONTENT" property="content" />
+		<result column="PIC" property="pic" />
+		<result column="AUTHOR" property="author" />
+		<result column="USER_ID" property="userId" />
+		<result column="PAGE_VIEW" property="pageView" />
+		<result column="TITLE" property="title" />
+		<result column="URL_ARTICAL" property="urlArtical" />
+		<result column="NUM" property="num" />
+		<result column="FATHERID" property="fatherId" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+		<result column="FATHERNUMBER" property="fatherNumber" />
+		<result column="TITLE" property="title" />
+		<result column="PIC" property="pic" />
+		<result column="ARTICAL_NAME" property="articName" />
+	</resultMap>
+
+	<insert id="insert" parameterType="ArticalPn" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="articalPn" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		CONTENT, PIC,
+		AUTHOR, USER_ID, PAGE_VIEW, TITLE, URL_ARTICAL,
+		NUM,FATHERID,ARTICAL_NAME,FATHERNUMBER)
+		values
+		(0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{content},#{pic},
+		#{author},#{userId},#{pageView},#{title},#{urlArtical},
+		#{num},#{fatherId},#{articName},#{fatherNumber})
+	</insert>
+
+	<update id="update" parameterType="ArticalPn">
+		update
+		<include refid="articalPn" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			CONTENT=#{content},
+			PIC=#{pic},
+			AUTHOR=#{author},
+			USER_ID=#{userId},
+			PAGE_VIEW=#{pageView},
+			TITLE=#{title},
+			URL_ARTICAL=#{urlArtical},
+			NUM=#{num}
+		</set>
+		<where>
+			ARTICAL_PN_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="articalPn" />
+		where ARTICAL_PN_ID = #{id}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="articalPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by ARTICAL_PN_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="articalPn" />
+		where ARTICAL_PN_ID = #{id}
+	</delete>
+
+<delete id="deleteByFatherId" parameterType="long">
+		delete from
+		<include refid="articalPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</delete>
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="articalPn != null and articalPn != ''"> and ARTICAL_PN
+			= #{articalPn}
+		</if>
+		<if test="title != null and title != ''"> and TITLE
+			= #{title}
+		</if>
+		<if test="author != null and author != ''"> and AUTHOR
+			= #{author}
+		</if>
+		<if test="userId != null and userId != ''"> and USER_ID
+			= #{userId}
+		</if>
+		<if test="num != null and num != ''"> and NUM
+			= #{num}
+		</if>
+		<if test="fatherId != null and fatherId != ''"> and FATHERID
+			= #{fatherId}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="articalPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by ARTICAL_PN_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="articalPn" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

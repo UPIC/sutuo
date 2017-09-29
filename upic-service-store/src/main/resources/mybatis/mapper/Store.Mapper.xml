@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.StoreDao">
+
+	<!-- 用户信息表 -->
+	<sql id="store"> T_STORE </sql>
+	<resultMap id="beanMap" type="Store">
+		<id column="STORE_ID" property="id" />
+		<result column="STORE_NUMBER" property="storeNumber" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="USERNAME" property="userName" />
+		<result column="PASSWORD" property="passWord" />
+		<result column="STORENAME" property="storeName" />
+		<result column="MAINSHOPS" property="mainShops" />
+		<result column="ADDRESS_ID" property="addressId" />
+		<result column="DETAIL_ADDRESS" property="detailAddress" />
+		<result column="COMPANY_NAME" property="companyName" />
+		<result column="PHONE" property="phone" />
+		<result column="STATUS" property="status" />
+		<result column="ISAGREE" property="isAgree" />
+		<result column="TYPE" property="type" />
+		<result column="STORE_BRIEF" property="storeBrief" />
+		<result column="LINKMAN_QQ" property="linkmanQQ" />
+		<result column="LINK_NAME" property="linkName" />
+		<result column="PROVINCE_NAME" property="provinceName" />
+		<result column="CITY_NAME" property="cityName" />
+		<result column="DISTRICT_NAME" property="districtName" />
+		<result column="HEAD_PIC" property="headPic" />
+		<result column="AVG_COST" property="avgCost" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+		<result column="BACK_PIC" property="backPic" />
+		<result column="TITLE" property="title" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Store" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into
+		<include refid="store" />
+		(VERSION,
+		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,HEAD_PIC,AVG_COST,USERNAME,PASSWORD,STORENAME,MAINSHOPS
+		,ADDRESS_ID,DETAIL_ADDRESS,COMPANY_NAME,PHONE,STATUS,ISAGREE,TYPE,STORE_BRIEF,LINKMAN_QQ,
+		STORE_NUMBER,LINK_NAME,PROVINCE_NAME,CITY_NAME,DISTRICT_NAME,BACK_PIC,TITLE)
+		values
+		(0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{headPic},#{avgCost},#{userName},#{passWord},#{storeName},
+		#{mainShops},#{addressId},#{detailAddress},#{companyName},#{phone},#{status},#{isAgree},#{type},
+		#{storeBrief},#{linkmanQQ},#{storeNumber},#{linkName},#{provinceName},#{cityName},#{districtName},#{backPic},#{title})
+	</insert>
+
+	<update id="update" parameterType="Store">
+		update
+		<include refid="store" />
+		<set>
+			VERSION = #{version}+1,
+			STORENAME=#{storeName},
+			MAINSHOPS=#{mainShops},
+			DETAIL_ADDRESS=#{detailAddress},
+			COMPANY_NAME=#{companyName},
+			PHONE=#{phone},
+			LINK_NAME=#{linkName},#
+			STORE_BRIEF=#{storeBrief},
+			LINKMAN_QQ=#{linkmanQQ},
+			HEAD_PIC=#{headPic},
+			AVG_COST=#{avgCost},
+			BACK_PIC=#{backPic},
+			TITLE=#{title},
+			STATUS=#{status}
+		</set>
+		<where>
+			STORE_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="store" />
+		where STORE_ID = #{id}
+	</select>
+	<select id="getByStoreNumber" parameterType="java.util.Map"
+		resultMap="beanMap">
+		select * from
+		<include refid="store" />
+		where STORE_NUMBER = #{storeNumber}
+	</select>
+
+	<select id="getByUserName" parameterType="java.util.Map"
+		resultMap="beanMap">
+		select * from
+		<include refid="store" />
+		where USERNAME = #{userName}
+	</select>
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="store" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STORE_ID
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="store" />
+		where STORE_ID = #{id}
+	</delete>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="userName != null and userName != ''"> and USERNAME
+			= #{userName}
+		</if>
+		<if test="storeName != null and storeName != ''"> and STORENAME
+			= #{storeName}
+		</if>
+		<if test="phone != null and phone != ''"> and PHONE
+			= #{phone}
+		</if>
+		<if test="status != null and status != ''"> and STATUS
+			= #{status}
+		</if>
+		<if test="isAgree != null and isAgree != ''"> and ISAGREE
+			= #{isAgree}
+		</if>
+		<if test="type != null and type != ''"> and TYPE
+			= #{type}
+		</if>
+		<if test="provinceName != null and provinceName != ''"> and PROVINCE_NAME
+			= #{provinceName}
+		</if>
+		<if test="cityName != null and cityName != ''"> and CITY_NAME
+			= #{cityName}
+		</if>
+		<if test="districtName != null and districtName != ''"> and DISTRICT_NAME
+			= #{districtName}
+		</if>
+		<if test="storeNumber != null and storeNumber != ''"> and STORE_NUMBER
+			= #{storeNumber}
+		</if>
+		<if test="title != null and title != ''"> and TITLE
+			= #{title}
+		</if>
+		<if test="orderDateBegin != null and orderDateBegin != '' ">
+			and CREATETIME <![CDATA[ >= ]]>
+			#{orderDateBegin,jdbcType=VARCHAR}
+		</if>
+		<if test="orderDateEnd != null and orderDateEnd != '' ">
+			and CREATETIME <![CDATA[ <= ]]>
+			#{orderDateEnd,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="store" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by STORE_ID desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="store" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+</mapper>

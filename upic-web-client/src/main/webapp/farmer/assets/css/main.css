@@ -1,0 +1,148 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+	div{
+		max-width: 640px;
+		
+	}
+	body{
+		background: #f2f2f2;
+
+	}
+	.am-active a{ background:#3bc89c!important;}
+	[data-am-widget=tabs]{
+		margin: 0px;
+		font-size: 0.8rem;
+		border-bottom:1px solid #E6E6E6;
+	}
+	.am-tabs-default .am-tabs-nav a {
+    color: #dedede;
+    line-height:35px;
+
+}
+.am-tabs-default .am-tabs-nav {
+    line-height: 40px;
+    background-color: white;
+}
+.fa fa-search{
+	color: #dedede;
+}
+* + address, * + blockquote, * + dl, * + fieldset, * + figure, * + hr, * + ol, * + p, * + pre, * + ul {
+    margin-top: 0;
+}
+p{
+
+	color: #696969
+}
+.am-list-news-default .am-list > li {
+    border-color:white;
+}
+
+.am-list-news-default .am-list .am-list-item-desced {
+    padding-top:0;
+    padding-bottom: 1rem;
+    margin-top:0 
+}
+.am-cf{
+	padding-bottom: 0px;
+	margin-bottom:0px 
+}
+
+.one {
+	margin-bottom:5px !important 
+}
+.am-icon-sm:before {
+    font-size: 100%;
+    vertical-align: -10%;
+    color:gray;
+}
+
+.am-icon-venus.am-icon-sm:before {
+    font-size: 100%;
+    vertical-align: -10%;
+    color:#FE77AB;
+}
+
+.am-icon-mars.am-icon-sm:before {
+    font-size: 100%;
+    vertical-align: -10%;
+    color:#3BC89C;
+}
+
+ .am-navbar-default .am-navbar-nav {
+    background-color:rgba(255,255,255,0.9);
+} 
+
+.am-icon-search{
+	color: #3BC89C;
+}
+.am-icon-angle-down{
+	color: #B6B6B6
+}
+
+
+ .scrollspy-nav {
+    top: 0;
+    z-index: 100;
+    background: white;
+    width: 100%;
+    padding: 0;
+  }
+
+  .scrollspy-nav ul {
+    margin: 0;
+    padding: 0px !important;
+    border-bottom: 1px solid #EDEDED;
+  }
+
+  .scrollspy-nav li {
+    display: inline-block;
+    list-style: none;
+    font-size:12px;
+    color:gray;
+    padding-right:5px;
+    line-height: 36px;
+    padding-left: 5px;
+    margin: 0px
+  }
+
+  .scrollspy-nav a {
+    color: #D7D7D7;
+    display: inline-block;
+    color: :gray;
+  }
+
+  .scrollspy-nav a.am-active {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .am-panel {
+    margin-top: 20px;
+  }
+.scrollspy-nav .active{
+	background-color: #3BC89C;
+	color: white;
+}
+.scrollspy-nav .active a{
+	color: white;
+}
+.am-icon-search .am-icon-md{
+	font-weight: 20;
+	font-size:80%
+}
+.am-icon-md:before {
+    font-size: 160%;
+    vertical-align: -16%;
+    font-weight: 10;
+}
+button{
+	max-width: 640px
+}
+.main{
+     background: url(../assets/i/examples/header.jpg); 
+     background-size:cover; 
+     width:100% ; 
+     height:132px 
+}

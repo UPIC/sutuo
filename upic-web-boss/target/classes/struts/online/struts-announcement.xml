@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="Announcement" extends="base">
+		<!-- 账户Action -->
+		<action name="announ_*" class="com.upic.web.boss.action.AnnouncementAction" method="{1}">
+		<result name="listAnnouncement">page/announcement/listAnnouncement.jsp</result>
+		<result name="readyUpdate">page/announcement/announcementEdit.jsp</result>
+		<result name="readyInSert">page/announcement/announcementAdd.jsp</result>
+		</action>
+	</package>
+
+</struts>
