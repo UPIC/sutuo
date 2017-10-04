@@ -1,68 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd  
             http://code.alibabatech.com/schema/dubbo  
             http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-	<!-- 提供方应用信息，用于计算依赖关系 -->
-	<dubbo:application name="upic-service-user" />
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="upic-service-user"/>
 
-	<!-- 使用zookeeper注册中心暴露服务地址 -->
-	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}"/>
 
-	<!-- 用dubbo协议在20880端口暴露服务 -->
-	<dubbo:protocol name="dubbo" port="20890" />
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20890"/>
 
-	<!-- 用户服务接口 -->
-	<dubbo:service interface="com.upic.service.IShopService"
-		ref="shopService" />
-	<dubbo:service interface="com.upic.service.IShopSignService"
-		ref="shopSignService" />
-	<dubbo:service interface="com.upic.service.IShopSignLinkService"
-		ref="shopSignLinkService" />
-	<dubbo:service interface="com.upic.service.IShopFarmService"
-		ref="shopFarmService" />
-	<dubbo:service interface="com.upic.service.IShopPicService"
-		ref="shopPicService" />
-	<dubbo:service interface="com.upic.service.IShopTypeService"
-		ref="shopTypeService" />
-	<dubbo:service interface="com.upic.service.IShopThemeService"
-		ref="shopThemeService" />
-	<dubbo:service interface="com.upic.service.IShopTicketService"
-		ref="shopTicketService" />
-	<dubbo:service interface="com.upic.service.ICommentService"
-		ref="commentService" />
-	<dubbo:service interface="com.upic.service.IAnnouncementService"
-		ref="announcementService" />
-	<dubbo:service interface="com.upic.service.IShopActivityService"
-		ref="shopActivityService" />
-	<dubbo:service interface="com.upic.service.IFirstTypeService"
-		ref="firstTypeService" />
-
-	<dubbo:service interface="com.upic.service.IStandardService"
-		ref="standardService" />
-	<dubbo:service interface="com.upic.service.IStandardTypeService"
-		ref="standardTypeService" />
-	<dubbo:service interface="com.upic.service.IStandardShopService"
-		ref="standardShopService" />
-	<dubbo:service interface="com.upic.service.IProjectShopService"
-		ref="projectShopService" />
-	<dubbo:service interface="com.upic.service.IThemetzShopService"
-		ref="themetzShopService" />
-	<dubbo:service interface="com.upic.service.IShopCollectionService"
-		ref="shopCollectionService" />
-	<dubbo:service interface="com.upic.service.IShopLogService"
-		ref="shopLogService" />
-	<dubbo:service interface="com.upic.service.IBriefPicService"
-		ref="briefPicService" />
-	<dubbo:service interface="com.upic.service.ICommentPicService"
-		ref="commentPicService" />
-	<dubbo:service interface="com.upic.service.IPicLogService"
-		ref="picLogService" />
-	<dubbo:service interface="com.upic.service.ITypeShopFarmService"
-		ref="typeShopFarmService" />
-	<dubbo:service interface="com.upic.service.ITypeFarmShopService"
-		ref="typeFarmShopService" />
+    <!-- 用户服务接口 -->
+    <dubbo:service interface="com.upic.service.IShopService"
+                   ref="shopService"/>
+    <dubbo:service interface="com.upic.service.IShopSignService"
+                   ref="shopSignService"/>
+    <dubbo:service interface="com.upic.service.IShopSignLinkService"
+                   ref="shopSignLinkService"/>
+    <dubbo:service interface="com.upic.service.IShopFarmService"
+                   ref="shopFarmService"/>
+    <dubbo:service interface="com.upic.service.IShopPicService"
+                   ref="shopPicService"/>
+    <dubbo:service interface="com.upic.service.IShopTypeService"
+                   ref="shopTypeService"/>
+    <dubbo:service interface="com.upic.service.IShopThemeService"
+                   ref="shopThemeService"/>
+    <dubbo:service interface="com.upic.service.IShopTicketService"
+                   ref="shopTicketService"/>
+    <dubbo:service interface="com.upic.service.ICommentService"
+                   ref="commentService"/>
+    <dubbo:service interface="com.upic.service.IAnnouncementService"
+                   ref="announcementService"/>
+    <dubbo:service interface="com.upic.service.IShopActivityService"
+                   ref="shopActivityService"/>
+    <dubbo:service interface="com.upic.service.IFirstTypeService"
+                   ref="firstTypeService"/>
+    <dubbo:service interface="com.upic.service.IStandardService"
+                   ref="standardService"/>
+    <dubbo:service interface="com.upic.service.IStandardTypeService"
+                   ref="standardTypeService"/>
+    <dubbo:service interface="com.upic.service.IStandardShopService"
+                   ref="standardShopService"/>
+    <dubbo:service interface="com.upic.service.IProjectShopService"
+                   ref="projectShopService"/>
+    <dubbo:service interface="com.upic.service.IThemetzShopService"
+                   ref="themetzShopService"/>
+    <dubbo:service interface="com.upic.service.IShopCollectionService"
+                   ref="shopCollectionService"/>
+    <dubbo:service interface="com.upic.service.IShopLogService"
+                   ref="shopLogService"/>
+    <dubbo:service interface="com.upic.service.IBriefPicService"
+                   ref="briefPicService"/>
+    <dubbo:service interface="com.upic.service.ICommentPicService"
+                   ref="commentPicService"/>
+    <dubbo:service interface="com.upic.service.IPicLogService"
+                   ref="picLogService"/>
+    <dubbo:service interface="com.upic.service.ITypeShopFarmService"
+                   ref="typeShopFarmService"/>
+    <dubbo:service interface="com.upic.service.ITypeFarmShopService"
+                   ref="typeFarmShopService"/>
+    <dubbo:service interface="com.upic.service.IShopFarmTypeService"
+                   ref="shopFarmTypeService"/>
+    <dubbo:service interface="com.upic.service.IShopCrowdFundingService"
+                   ref="shopCrowdFundingService"/>
 </beans>  

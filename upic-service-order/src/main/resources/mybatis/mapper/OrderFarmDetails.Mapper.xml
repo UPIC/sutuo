@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upic.dao.impl.OrderFarmDetailsDao">
+
+	<!-- 用户信息表 -->
+	<sql id="orderFarmDetails"> T_SHOP_TYPE_FARM </sql>
+	<resultMap id="beanMap" type="OrderFarmDetails">
+		<result column="ORDER_FARM_DETAILS_ID" property="id" />
+		<result column="VERSION" property="version" />
+		<result column="CREATETIME" property="createTime" />
+		<result column="SHOP_FARM_TYPE_ID" property="shopFarmTypeId" />
+		<result column="SHOP_NAME" property="shopName" />
+		<result column="PRICE" property="price" />
+		<result column="COST" property="cost" />
+		<result column="LIMIT" property="limit" />
+		<result column="BRIEF" property="brief" />
+		<result column="ORDER_NUMBER" property="orderNumber" />
+		<result column="COUNT" property="count" />
+		<result column="FINAL_COST" property="finalCost" />
+		<result column="FIELD1" property="field1" />
+		<result column="FIELD2" property="field2" />
+		<result column="FIELD3" property="field3" />
+		<result column="FIELD4" property="field4" />
+		<result column="FIELD5" property="field5" />
+	</resultMap>
+
+	<insert id="insert" parameterType="OrderFarmDetails">
+		insert into
+		<include refid="orderFarmDetails" />
+		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+		SHOP_FARM_TYPE_ID,
+		SHOP_NAME,PRICE,COST,LIMIT,BRIEF,ORDER_NUMBER,COUNT,FINAL_COST)
+		values
+		(0,
+		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{shopFarmTypeId},#{shopName},#{price},#{cost},#{limit},#{brief},#{orderNumber},#{count},#{finalCost})
+	</insert>
+
+	<update id="update" parameterType="OrderFarmDetails">
+		update
+		<include refid="orderFarmDetails" />
+		<set>
+			VERSION = #{version}+1,
+			FIELD1=#{field1},
+			FIELD2=#{field2},
+			FIELD3=#{field3},
+			FIELD4=#{field4},
+			FIELD5=#{field5},
+			SHOP_FARM_TYPE_ID=#{shopFarmTypeId},
+			SHOP_NAME=#{shopName},
+			PRICE=#{price},
+			COST=#{cost},
+			LIMIT=#{limit},
+			BRIEF=#{brief},
+			ORDER_NUMBER=#{orderNumber},
+			COUNT=#{count},
+			FINAL_COST=#{finalCost}
+		</set>
+		<where>
+			ORDER_FARM_DETAILS_ID = #{id} and VERSION = #{version}
+		</where>
+	</update>
+
+	<sql id="condition_sql">
+		<!-- Equal query -->
+		<if test="typeId != null and typeId != ''"> and TYPE_ID
+			= #{typeId}
+		</if>
+		<if test="shopId != null and shopId != ''"> and SHOP_ID
+			= #{shopId}
+		</if>
+	</sql>
+
+	<select id="getById" parameterType="long" resultMap="beanMap">
+		select * from
+		<include refid="orderFarmDetails" />
+		where ORDER_FARM_DETAILS_ID = #{id}
+	</select>
+
+	<select id="listAll" resultMap="beanMap">
+		select * from
+		<include refid="orderFarmDetails" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<delete id="deleteById" parameterType="long">
+		delete from
+		<include refid="orderFarmDetails" />
+		where ORDER_FARM_DETAILS_ID = #{id}
+	</delete>
+
+	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+		select * from
+		<include refid="orderFarmDetails" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+		order by CREATETIME desc
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
+		select count(1) from
+		<include refid="orderFarmDetails" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+</mapper>

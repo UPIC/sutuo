@@ -2,102 +2,118 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.upic.dao.impl.ShopFarmDao">
 
-	<!-- 用户信息表 -->
-	<sql id="shopFarm"> T_SHOP_FARM </sql>
-	<resultMap id="beanMap" type="ShopFarm">
-		<id column="FARM_ID" property="id" />
-		<result column="VERSION" property="version" />
-		<result column="CREATETIME" property="createTime" />
-		<result column="PLACE_OF_ORGIN" property="placeOfOrgin" />
-		<result column="FOOD_ADDIITIVE" property="foodAddiitive" />
-		<result column="QUALITY_GUARANTEE_PERIOD" property="qualityGuaranteePeriod" />
-		<result column="STORAGE_TEMP" property="storageTemp" />
-		<result column="T_SHOP_ID" property="shopId" />
-		<result column="FIELD1" property="field1" />
-		<result column="FIELD2" property="field2" />
-		<result column="FIELD3" property="field3" />
-		<result column="FIELD4" property="field4" />
-		<result column="FIELD5" property="field5" />
-	</resultMap>
+    <!-- 用户信息表 -->
+    <sql id="shopFarm"> T_SHOP_FARM </sql>
+    <resultMap id="beanMap" type="ShopFarm">
+        <id column="FARM_ID" property="id"/>
+        <result column="VERSION" property="version"/>
+        <result column="CREATETIME" property="createTime"/>
+        <result column="PLACE_OF_ORGIN" property="placeOfOrgin"/>
+        <result column="FOOD_ADDIITIVE" property="foodAddiitive"/>
+        <result column="QUALITY_GUARANTEE_PERIOD" property="qualityGuaranteePeriod"/>
+        <result column="STORAGE_TEMP" property="storageTemp"/>
+        <result column="T_SHOP_ID" property="shopId"/>
 
-	<insert id="insert" parameterType="ShopFarm" keyProperty="id"
-		useGeneratedKeys="true">
-		insert into
-		<include refid="shopFarm" />
-		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,PLACE_OF_ORGIN,FOOD_ADDIITIVE,QUALITY_GUARANTEE_PERIOD,STORAGE_TEMP,T_SHOP_ID)
-		values (0,NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{placeOfOrgin},#{foodAddiitive},#{qualityGuaranteePeriod},#{storageTemp},#{shopId})
-	</insert>
+        <result column="SHOP_NAME" property="shopName"/>
+        <result column="PRICE" property="price"/>
+        <result column="COST" property="cost"/>
+        <result column="LIMIT" property="limit"/>
+        <result column="BRIEF" property="brief"/>
+        <result column="SHOP_FARM_TYPE_ID" property="shopFarmTypeId"/>
 
-	<update id="update" parameterType="ShopFarm">
-		update
-		<include refid="shopFarm" />
-		<set>
-			VERSION = #{version}+1,
-			FIELD1=#{field1},
-			PLACE_OF_ORGIN=#{placeOfOrgin},
-			FOOD_ADDIITIVE=#{foodAddiitive},
-			QUALITY_GUARANTEE_PERIOD=#{qualityGuaranteePeriod},
-			STORAGE_TEMP=#{storageTemp},
-		</set>
-		<where>
-			FARM_ID = #{id} and VERSION = #{version}
-		</where>
-	</update>
-	<select id="getById" parameterType="long" resultMap="beanMap">
-		select * from
-		<include refid="shopFarm" />
-		where FARM_ID = #{id}
-	</select>
-	<select id="getByShopId" parameterType="java.util.Map" resultMap="beanMap">
-		select * from
-		<include refid="shopFarm" />
-		where T_SHOP_ID = #{shopId}
-	</select>
+        <result column="FIELD1" property="field1"/>
+        <result column="FIELD2" property="field2"/>
+        <result column="FIELD3" property="field3"/>
+        <result column="FIELD4" property="field4"/>
+        <result column="FIELD5" property="field5"/>
+    </resultMap>
 
-	<select id="getByField1" parameterType="java.util.Map" resultMap="beanMap">
-		select * from
-		<include refid="shopFarm" />
-		where FIELD1 = #{field1}
-	</select>
+    <insert id="insert" parameterType="ShopFarm" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into
+        <include refid="shopFarm"/>
+        (VERSION,
+        CREATETIME,SHOP_NAME,PRICE,COST,LIMIT,BRIEF,SHOP_FARM_TYPE_ID,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,PLACE_OF_ORGIN,FOOD_ADDIITIVE,QUALITY_GUARANTEE_PERIOD,STORAGE_TEMP,T_SHOP_ID)
+        values
+        (0,NOW(),#{shopName},#{price},#{cost},#{limit},#{brief},#{shopFarmTypeId},#{field1},#{field2},#{field3},#{field4},#{field5},#{placeOfOrgin},#{foodAddiitive},#{qualityGuaranteePeriod},#{storageTemp},#{shopId})
+    </insert>
 
-	<select id="listAll" resultMap="beanMap">
-		select * from
-		<include refid="shopFarm" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-		order by FARM_ID
-	</select>
+    <update id="update" parameterType="ShopFarm">
+        update
+        <include refid="shopFarm"/>
+        <set>
+            VERSION = #{version}+1,
+            FIELD1=#{field1},
+            PLACE_OF_ORGIN=#{placeOfOrgin},
+            FOOD_ADDIITIVE=#{foodAddiitive},
+            QUALITY_GUARANTEE_PERIOD=#{qualityGuaranteePeriod},
+            STORAGE_TEMP=#{storageTemp},
+            SHOP_NAME=#{shopName},
+            PRICE=#{price},
+            COST=#{cost},
+            LIMIT=#{limit},
+            BRIEF=#{brief},
+            SHOP_FARM_TYPE_ID=#{shopFarmTypeId}
+        </set>
+        <where>
+            FARM_ID = #{id} and VERSION = #{version}
+        </where>
+    </update>
+    <select id="getById" parameterType="long" resultMap="beanMap">
+        select * from
+        <include refid="shopFarm"/>
+        where FARM_ID = #{id}
+    </select>
+    <select id="getByShopId" parameterType="java.util.Map" resultMap="beanMap">
+        select * from
+        <include refid="shopFarm"/>
+        where T_SHOP_ID = #{shopId}
+    </select>
 
-	<delete id="deleteById" parameterType="long">
-		delete from
-		<include refid="shopFarm" />
-		where FARM_ID = #{id}
-	</delete>
+    <select id="getByField1" parameterType="java.util.Map" resultMap="beanMap">
+        select * from
+        <include refid="shopFarm"/>
+        where FIELD1 = #{field1}
+    </select>
 
-	<sql id="condition_sql">
-		<if test="shopId != null and shopId != ''">and T_SHOP_ID=#{shopId}</if>
-		<if test="field1 != null and field1 != ''"> and FIELD1
-			= #{field1}
-		</if>
-	</sql>
+    <select id="listAll" resultMap="beanMap">
+        select * from
+        <include refid="shopFarm"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        order by FARM_ID
+    </select>
 
-	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
-		select * from
-		<include refid="shopFarm" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-		order by FARM_ID desc
-	</select>
+    <delete id="deleteById" parameterType="long">
+        delete from
+        <include refid="shopFarm"/>
+        where FARM_ID = #{id}
+    </delete>
 
-	<select id="listPageCount" parameterType="java.util.Map"
-		resultType="long">
-		select count(1) from
-		<include refid="shopFarm" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-	</select>
+    <sql id="condition_sql">
+        <if test="shopId != null and shopId != ''">and T_SHOP_ID=#{shopId}</if>
+        <if test="field1 != null and field1 != ''">and FIELD1
+            = #{field1}
+        </if>
+    </sql>
+
+    <select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+        select * from
+        <include refid="shopFarm"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        order by FARM_ID desc
+    </select>
+
+    <select id="listPageCount" parameterType="java.util.Map"
+            resultType="long">
+        select count(1) from
+        <include refid="shopFarm"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </select>
 
 </mapper>
