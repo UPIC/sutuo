@@ -94,12 +94,14 @@
         <include refid="orders"/>
         where MAIN_ID = #{mainId}
     </select>
+
     <select id="getByOrderId" parameterType="java.util.Map"
             resultMap="beanMap">
         select * from
         <include refid="orders"/>
         where ORDER_ID = #{orderId}
     </select>
+
     <select id="listAll" resultMap="beanMap">
         select * from
         <include refid="orders"/>
@@ -107,6 +109,7 @@
             <include refid="condition_sql"/>
         </where>
     </select>
+
     <select id="listBy" resultMap="beanMap">
         select * from
         <include refid="orders"/>
@@ -122,6 +125,7 @@
             <include refid="condition_sql"/>
         </where>
     </select>
+
     <delete id="deleteById" parameterType="long">
         delete from
         <include refid="orders"/>
@@ -232,6 +236,7 @@
         </where>
         order by a.CREATETIME desc
     </select>
+
     <sql id="condition_sql_OrderCollection">
         <if test="status != null and status != '' ">and a.STATUS = #{status,jdbcType=VARCHAR}</if>
         <if test="orderClass != null and orderClass != ''">and ORDER_CLASS = #{orderClass,jdbcType=VARCHAR}</if>

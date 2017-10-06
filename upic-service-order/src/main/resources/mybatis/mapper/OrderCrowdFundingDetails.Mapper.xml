@@ -2,103 +2,114 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.upic.dao.impl.OrderCrowdFundingDetailsDao">
 
-	<!-- 用户信息表 -->
-	<sql id="orderCrowdFundingDetails"> T_SHOP_TYPE_FARM </sql>
-	<resultMap id="beanMap" type="OrderCrowdFundingDetails">
-		<result column="ORDER_CROWD_FUNDING_DETAILS_ID" property="id" />
-		<result column="VERSION" property="version" />
-		<result column="CREATETIME" property="createTime" />
-		<result column="START_TIME" property="startTime" />
-		<result column="END_TIME" property="endTime" />
-		<result column="TARGET_MONEY" property="targetMoney" />
-		<result column="CONTENT" property="content" />
-		<result column="SHOP_NUMBER" property="shopNumber" />
-		<result column="ORDER_NUMBER" property="orderNumber" />
-		<result column="FIELD1" property="field1" />
-		<result column="FIELD2" property="field2" />
-		<result column="FIELD3" property="field3" />
-		<result column="FIELD4" property="field4" />
-		<result column="FIELD5" property="field5" />
-	</resultMap>
+    <!-- 用户信息表 -->
+    <sql id="orderCrowdFundingDetails"> T_SHOP_TYPE_FARM </sql>
+    <resultMap id="beanMap" type="OrderCrowdFundingDetails">
+        <result column="ORDER_CROWD_FUNDING_DETAILS_ID" property="id"/>
+        <result column="VERSION" property="version"/>
+        <result column="CREATETIME" property="createTime"/>
+        <result column="START_TIME" property="startTime"/>
+        <result column="END_TIME" property="endTime"/>
+        <result column="TARGET_MONEY" property="targetMoney"/>
+        <result column="CONTENT" property="content"/>
+        <result column="SHOP_NUMBER" property="shopNumber"/>
+        <result column="ORDER_NUMBER" property="orderNumber"/>
+        <result column="FIELD1" property="field1"/>
+        <result column="FIELD2" property="field2"/>
+        <result column="FIELD3" property="field3"/>
+        <result column="FIELD4" property="field4"/>
+        <result column="FIELD5" property="field5"/>
+    </resultMap>
 
-	<insert id="insert" parameterType="OrderCrowdFundingDetails">
-		insert into
-		<include refid="orderCrowdFundingDetails" />
-		<include refid="shopCrowdFunding" />
-		(VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
-		START_TIME,
-		END_TIME,TARGET_MONEY,CONTENT,SHOP_NUMBER,ORDER_NUMBER)
-		values (0,
-		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{startTime},#{endTime},#{targetMoney},#{content},#{shopNumber},#{orderNumber})
-	</insert>
+    <insert id="insert" parameterType="OrderCrowdFundingDetails">
+        insert into
+        <include refid="orderCrowdFundingDetails"/>
+        <include refid="shopCrowdFunding"/>
+        (VERSION, CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,
+        START_TIME,
+        END_TIME,TARGET_MONEY,CONTENT,SHOP_NUMBER,ORDER_NUMBER)
+        values (0,
+        NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{startTime},#{endTime},#{targetMoney},#{content},#{shopNumber},#{orderNumber})
+    </insert>
 
-	<update id="update" parameterType="OrderCrowdFundingDetails">
-		update
-		<include refid="orderCrowdFundingDetails" />
-		<set>
-			VERSION = #{version}+1,
-			FIELD1=#{field1},
-			FIELD2=#{field2},
-			FIELD3=#{field3},
-			FIELD4=#{field4},
-			FIELD5=#{field5},
-			START_TIME=#{startTime},
-			END_TIME=#{endTime},
-			TARGET_MONEY=#{targetMoney},
-			CONTENT=#{content},
-			SHOP_NUMBER=#{shopNumber},
-			ORDER_NUMBER=#{orderNumber}
-		</set>
-		<where>
-			ORDER_CROWD_FUNDING_DETAILS_ID = #{id} and VERSION = #{version}
-		</where>
-	</update>
+    <update id="update" parameterType="OrderCrowdFundingDetails">
+        update
+        <include refid="orderCrowdFundingDetails"/>
+        <set>
+            VERSION = #{version}+1,
+            FIELD1=#{field1},
+            FIELD2=#{field2},
+            FIELD3=#{field3},
+            FIELD4=#{field4},
+            FIELD5=#{field5},
+            START_TIME=#{startTime},
+            END_TIME=#{endTime},
+            TARGET_MONEY=#{targetMoney},
+            CONTENT=#{content},
+            SHOP_NUMBER=#{shopNumber},
+            ORDER_NUMBER=#{orderNumber}
+        </set>
+        <where>
+            ORDER_CROWD_FUNDING_DETAILS_ID = #{id} and VERSION = #{version}
+        </where>
+    </update>
 
-	<sql id="condition_sql">
-		<!-- Equal query -->
-		<if test="typeId != null and typeId != ''"> and TYPE_ID
-			= #{typeId}
-		</if>
-		<if test="shopId != null and shopId != ''"> and SHOP_ID
-			= #{shopId}
-		</if>
-	</sql>
+    <sql id="condition_sql">
+        <!-- Equal query -->
+        <if test="targetMoney != null and targetMoney != ''">and TARGET_MONEY
+            = #{targetMoney}
+        </if>
+        <if test="shopNumber != null and shopNumber != ''">and SHOP_NUMBER
+            = #{shopNumber}
+        </if>
+        <if test="orderNumber != null and orderNumber != ''">and ORDER_NUMBER
+            = #{orderNumber}
+        </if>
+    </sql>
 
-	<select id="getById" parameterType="long" resultMap="beanMap">
-		select * from
-		<include refid="orderCrowdFundingDetails" />
-		where ORDER_CROWD_FUNDING_DETAILS_ID = #{id}
-	</select>
+    <select id="getById" parameterType="long" resultMap="beanMap">
+        select * from
+        <include refid="orderCrowdFundingDetails"/>
+        where ORDER_CROWD_FUNDING_DETAILS_ID = #{id}
+    </select>
 
-	<select id="listAll" resultMap="beanMap">
-		select * from
-		<include refid="orderCrowdFundingDetails" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-	</select>
+    <select id="listAll" resultMap="beanMap">
+        select * from
+        <include refid="orderCrowdFundingDetails"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </select>
 
-	<delete id="deleteById" parameterType="long">
-		delete from
-		<include refid="orderCrowdFundingDetails" />
-		where ORDER_CROWD_FUNDING_DETAILS_ID = #{id}
-	</delete>
+    <delete id="deleteById" parameterType="long">
+        delete from
+        <include refid="orderCrowdFundingDetails"/>
+        where ORDER_CROWD_FUNDING_DETAILS_ID = #{id}
+    </delete>
 
-	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
-		select * from
-		<include refid="orderCrowdFundingDetails" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-		order by CREATETIME desc
-	</select>
+    <select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+        select * from
+        <include refid="orderCrowdFundingDetails"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        order by CREATETIME desc
+    </select>
 
-	<select id="listPageCount" parameterType="java.util.Map"
-		resultType="long">
-		select count(1) from
-		<include refid="orderCrowdFundingDetails" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-	</select>
+    <select id="listPageCount" parameterType="java.util.Map"
+            resultType="long">
+        select count(1) from
+        <include refid="orderCrowdFundingDetails"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </select>
+
+    <select id="getSum" parameterType="java.util.Map" resultMap="double">
+        SELECT SUM(*) FROM
+        <include refid="orderCrowdFundingDetails"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </select>
 </mapper>

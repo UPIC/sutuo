@@ -387,6 +387,16 @@
 			<artifactId>upic-common-config</artifactId>
 			<version>${upic-common-config.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>4.3.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.3.7.RELEASE</version>
+		</dependency>
 		<!-- end 内部jar包 -->
 	</dependencies>
 </project>

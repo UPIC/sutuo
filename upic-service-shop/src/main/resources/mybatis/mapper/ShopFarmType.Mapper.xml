@@ -51,8 +51,14 @@
 
 	<sql id="condition_sql">
 		<!-- Equal query -->
-		<if test="storeId != null and storeId != ''"> and STORE_ID
-			= #{storeId}
+		<if test="typeName != null and typeName != ''"> and TYPE_NAME
+			= #{typeName}
+		</if>
+		<if test="typeTitle != null and typeTitle != ''"> and TYPE_TITLE
+			= #{typeTitle}
+		</if>
+		<if test="storeNumber != null and storeNumber != ''"> and STORE_NUMBER
+			= #{storeNumber}
 		</if>
 	</sql>
 
