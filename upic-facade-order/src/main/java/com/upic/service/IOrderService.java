@@ -11,4 +11,5 @@ public interface IOrderService extends BaseService<Order> {
 
 	long insert(Order o);
 
+
 }

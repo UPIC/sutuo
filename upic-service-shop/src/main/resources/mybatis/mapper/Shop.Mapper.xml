@@ -2,173 +2,193 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.upic.dao.impl.ShopDao">
 
-	<!-- 用户信息表 -->
-	<sql id="shop"> T_SHOP </sql>
-	<sql id="store"> T_STORE </sql>
-	<resultMap id="beanMap" type="Shop">
-		<id column="SHOP_ID" property="id" />
-		<result column="VERSION" property="version" />
-		<result column="CREATETIME" property="createTime" />
-		<result column="SHOP_NUMBER" property="shopNumber" />
-		<result column="SHOP_TYPE" property="shopType" />
-		<result column="SHOP_NAME" property="shopName" />
-		<result column="SHOP_TITLE" property="shopTitle" />
-		<result column="SHOP_PRICE" property="shopPrice" />
-		<result column="SHOP_CONTENT" property="content" />
-		<result column="STATUS" property="status" />
-		<result column="PRIME_COST" property="primeCost" />
-		<result column="INVENTORY" property="inventory" />
-		<result column="FREIGHT" property="freight" />
-		<result column="BUY_WAY" property="buyWay" />
-		<result column="SHOP_CLASS" property="shopClass" />
-		<result column="IS_PRESELL" property="isPresell" />
-		<result column="PRESELL_TIME" property="presellTime" />
-		<result column="PREDELIVER_START_TIME" property="predeliverStartTime" />
-		<result column="PREDELIVER_END_TIME" property="predeliverEndTime" />
-		<result column="T_STORE_NUMBER" property="storeNumber" />
-		<result column="PAGE_VIEW" property="pageView" />
-		<result column="SHOP_THEME_NAME" property="themeName" />
-		<result column="LAST_GROUNDING_TIME" property="lastGroundingTime" />
-		<result column="LIMIT_COUNT" property="limitCount" />
-		<result column="PURCHASE_NOTES" property="purchaseNotes" />
-		<result column="HEAD_PIC" property="headPic" />
-		<result column="AVG_COST" property="avgCost" />
-		<result column="LIMIT_BUY" property="limitBuy" />
-		<result column="FIELD1" property="field1" />
-		<result column="FIELD2" property="field2" />
-		<result column="FIELD3" property="field3" />
-		<result column="FIELD4" property="field4" />
-		<result column="FIELD5" property="field5" />
-	</resultMap>
+    <!-- 用户信息表 -->
+    <sql id="shop"> T_SHOP </sql>
+    <sql id="store"> T_STORE </sql>
+    <sql id="shopFarm">T_SHOP_FARM</sql>
+    <resultMap id="beanMap" type="Shop">
+        <id column="SHOP_ID" property="id"/>
+        <result column="VERSION" property="version"/>
+        <result column="CREATETIME" property="createTime"/>
+        <result column="SHOP_NUMBER" property="shopNumber"/>
+        <result column="SHOP_TYPE" property="shopType"/>
+        <result column="SHOP_NAME" property="shopName"/>
+        <result column="SHOP_TITLE" property="shopTitle"/>
+        <result column="SHOP_PRICE" property="shopPrice"/>
+        <result column="SHOP_CONTENT" property="content"/>
+        <result column="STATUS" property="status"/>
+        <result column="PRIME_COST" property="primeCost"/>
+        <result column="INVENTORY" property="inventory"/>
+        <result column="FREIGHT" property="freight"/>
+        <result column="BUY_WAY" property="buyWay"/>
+        <result column="SHOP_CLASS" property="shopClass"/>
+        <result column="IS_PRESELL" property="isPresell"/>
+        <result column="PRESELL_TIME" property="presellTime"/>
+        <result column="PREDELIVER_START_TIME" property="predeliverStartTime"/>
+        <result column="PREDELIVER_END_TIME" property="predeliverEndTime"/>
+        <result column="T_STORE_NUMBER" property="storeNumber"/>
+        <result column="PAGE_VIEW" property="pageView"/>
+        <result column="SHOP_THEME_NAME" property="themeName"/>
+        <result column="LAST_GROUNDING_TIME" property="lastGroundingTime"/>
+        <result column="LIMIT_COUNT" property="limitCount"/>
+        <result column="PURCHASE_NOTES" property="purchaseNotes"/>
+        <result column="HEAD_PIC" property="headPic"/>
+        <result column="AVG_COST" property="avgCost"/>
+        <result column="LIMIT_BUY" property="limitBuy"/>
+        <result column="FIELD1" property="field1"/>
+        <result column="FIELD2" property="field2"/>
+        <result column="FIELD3" property="field3"/>
+        <result column="FIELD4" property="field4"/>
+        <result column="FIELD5" property="field5"/>
+    </resultMap>
 
-	<insert id="insert" parameterType="Shop" keyProperty="id"
-		useGeneratedKeys="true">
-		insert into
-		<include refid="shop" />
-		(VERSION,
-		CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,HEAD_PIC,AVG_COST,
-		SHOP_NUMBER,SHOP_TYPE,SHOP_NAME,SHOP_TITLE,SHOP_PRICE,SHOP_CONTENT,STATUS,PRIME_COST,INVENTORY
-		,FREIGHT,BUY_WAY,SHOP_CLASS,IS_PRESELL,PRESELL_TIME,PREDELIVER_START_TIME,PREDELIVER_END_TIME,T_STORE_NUMBER,PAGE_VIEW,SHOP_THEME_NAME,LAST_GROUNDING_TIME,LIMIT_COUNT,PURCHASE_NOTES,LIMIT_BUY)
-		values (0,
-		NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{headPic},#{avgCost},#{shopNumber},#{shopType},#{shopName},#{shopTitle},#{shopPrice},#{content},101,#{primeCost},
-		#{inventory},#{freight},#{buyWay},#{shopClass},#{isPresell},#{presellTime},#{predeliverStartTime},#{predeliverEndTime},#{storeNumber},
-		#{pageView},#{themeName},#{lastGroundingTime},#{limitCount},#{purchaseNotes},#{limitBuy})
-	</insert>
+    <insert id="insert" parameterType="Shop" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into
+        <include refid="shop"/>
+        (VERSION,
+        CREATETIME,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,HEAD_PIC,AVG_COST,
+        SHOP_NUMBER,SHOP_TYPE,SHOP_NAME,SHOP_TITLE,SHOP_PRICE,SHOP_CONTENT,STATUS,PRIME_COST,INVENTORY
+        ,FREIGHT,BUY_WAY,SHOP_CLASS,IS_PRESELL,PRESELL_TIME,PREDELIVER_START_TIME,PREDELIVER_END_TIME,T_STORE_NUMBER,PAGE_VIEW,SHOP_THEME_NAME,LAST_GROUNDING_TIME,LIMIT_COUNT,PURCHASE_NOTES,LIMIT_BUY)
+        values (0,
+        NOW(),#{field1},#{field2},#{field3},#{field4},#{field5},#{headPic},#{avgCost},#{shopNumber},#{shopType},#{shopName},#{shopTitle},#{shopPrice},#{content},101,#{primeCost},
+        #{inventory},#{freight},#{buyWay},#{shopClass},#{isPresell},#{presellTime},#{predeliverStartTime},#{predeliverEndTime},#{storeNumber},
+        #{pageView},#{themeName},#{lastGroundingTime},#{limitCount},#{purchaseNotes},#{limitBuy})
+    </insert>
 
-	<update id="update" parameterType="Shop">
-		update
-		<include refid="shop" />
-		<set>
-			VERSION = #{version}+1,
-			SHOP_TYPE=#{shopType},
-			SHOP_NAME=#{shopName},
-			SHOP_TITLE=#{shopTitle},
-			SHOP_PRICE=#{shopPrice},
-			SHOP_CONTENT=#{content},
-			STATUS=#{status},
-			INVENTORY=#{inventory},
-			FREIGHT=#{freight},
-			IS_PRESELL=#{isPresell},
-			PRESELL_TIME=#{presellTime},
-			PREDELIVER_START_TIME=#{predeliverStartTime},
-			PREDELIVER_END_TIME=#{predeliverEndTime},
-			SHOP_THEME_NAME=#{themeName},
-			HEAD_PIC=#{headPic},
-			AVG_COST=#{avgCost},
-			LIMIT_BUY=#{limitBuy}
-		</set>
-		<where>
-			SHOP_ID = #{id} and VERSION = #{version}
-		</where>
-	</update>
-	<select id="getById" parameterType="long" resultMap="beanMap">
-		select * from
-		<include refid="shop" />
-		where SHOP_ID = #{id}
-	</select>
-	<select id="listAll" resultMap="beanMap">
-		select * from
-		<include refid="shop" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-		order by SHOP_ID
-	</select>
+    <update id="update" parameterType="Shop">
+        update
+        <include refid="shop"/>
+        <set>
+            VERSION = #{version}+1,
+            SHOP_TYPE=#{shopType},
+            SHOP_NAME=#{shopName},
+            SHOP_TITLE=#{shopTitle},
+            SHOP_PRICE=#{shopPrice},
+            SHOP_CONTENT=#{content},
+            STATUS=#{status},
+            INVENTORY=#{inventory},
+            FREIGHT=#{freight},
+            IS_PRESELL=#{isPresell},
+            PRESELL_TIME=#{presellTime},
+            PREDELIVER_START_TIME=#{predeliverStartTime},
+            PREDELIVER_END_TIME=#{predeliverEndTime},
+            SHOP_THEME_NAME=#{themeName},
+            HEAD_PIC=#{headPic},
+            AVG_COST=#{avgCost},
+            LIMIT_BUY=#{limitBuy}
+        </set>
+        <where>
+            SHOP_ID = #{id} and VERSION = #{version}
+        </where>
+    </update>
 
-	<delete id="deleteById" parameterType="long">
-		delete from
-		<include refid="shop" />
-		where SHOP_ID = #{id}
-	</delete>
-	<select id="getByStoreNumber" parameterType="java.util.Map"
-		resultMap="beanMap">
-		select * from
-		<include refid="shop" />
-		where T_STORE_NUMBER= #{storeNumber}
-	</select>
+    <select id="getById" parameterType="long" resultMap="beanMap">
+        select * from
+        <include refid="shop"/>
+        where SHOP_ID = #{id}
+    </select>
 
-	<select id="getByShopNumber" parameterType="java.util.Map"
-		resultMap="beanMap">
-		select * from
-		<include refid="shop" />
-		where SHOP_NUMBER= #{shopNumber}
-	</select>
+    <select id="listAll" resultMap="beanMap">
+        select * from
+        <include refid="shop"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        order by SHOP_ID
+    </select>
 
-	<sql id="condition_sql">
-		<!-- Equal query -->
-		<if test="shopName != null and shopName != ''"> and SHOP_NAME
-			like
-			CONCAT(CONCAT('%',
-			#{shopName}), '%')
-		</if>
-		<if test="shopNumber != null and shopNumber != ''">and SHOP_NUMBER=#{shopNumber}</if>
-		<if test="shopType != null and shopType != ''">and SHOP_TYPE=#{shopType}</if>
-		<if test="isPresell != null and isPresell != ''">and IS_PRESELL=#{isPresell}</if>
-		<if test="storeNumber != null and storeNumber != ''">and T_STORE_NUMBER=#{storeNumber}</if>
-		<if test="themeName != null and themeName != ''">and SHOP_THEME_NAME=#{themeName}</if>
-		<if test="status != null and status != ''">and STATUS=#{status}</if>
+    <delete id="deleteById" parameterType="long">
+        delete from
+        <include refid="shop"/>
+        where SHOP_ID = #{id}
+    </delete>
 
-		<if test="shopClass != null and shopClass != ''">and SHOP_CLASS = #{shopClass}</if>
-		<if test="shopClasses != null and shopClasses != ''">and SHOP_CLASS != #{shopClasses}</if>
-		<if test="shopId != null and shopId != ''">and SHOP_ID=#{shopId}</if>
-		<if test="orderDateBegin != null and orderDateBegin != '' ">
-			and LAST_GROUNDING_TIME <![CDATA[ >= ]]>
-			#{orderDateBegin,jdbcType=VARCHAR}
-		</if>
-		<if test="orderDateEnd != null and orderDateEnd != '' ">
-			and LAST_GROUNDING_TIME <![CDATA[ <= ]]>
-			#{orderDateEnd,jdbcType=VARCHAR}
-		</if>
-	</sql>
+    <select id="getByStoreNumber" parameterType="java.util.Map"
+            resultMap="beanMap">
+        select * from
+        <include refid="shop"/>
+        where T_STORE_NUMBER= #{storeNumber}
+    </select>
 
-	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
-		select * from
-		<include refid="shop" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-		order by SHOP_ID desc
-	</select>
+    <select id="getByShopNumber" parameterType="java.util.Map"
+            resultMap="beanMap">
+        select * from
+        <include refid="shop"/>
+        where SHOP_NUMBER= #{shopNumber}
+    </select>
 
-	<select id="listPageCount" parameterType="java.util.Map"
-		resultType="long">
-		select count(1) from
-		<include refid="shop" />
-		<where>
-			<include refid="condition_sql" />
-		</where>
-	</select>
-	<select id="listbycityandtheme" parameterType="java.util.Map"
-		resultMap="beanMap">
-		select * from <include refid="shop" /> a,
-		<include refid="store" /> b
-		<where>
-			a.T_STORE_NUMBER = b.STORE_NUMBER
-			and 
-			b.CITY_NAME = #{city}
-			and 
-			a.SHOP_THEME_NAME = #{theme}
-			and a.STATUS =#{status}
-		</where>
-	</select>
+    <sql id="condition_sql">
+        <!-- Equal query -->
+        <if test="shopName != null and shopName != ''">and SHOP_NAME
+            like
+            CONCAT(CONCAT('%',
+            #{shopName}), '%')
+        </if>
+        <if test="shopNumber != null and shopNumber != ''">and SHOP_NUMBER=#{shopNumber}</if>
+        <if test="shopType != null and shopType != ''">and SHOP_TYPE=#{shopType}</if>
+        <if test="isPresell != null and isPresell != ''">and IS_PRESELL=#{isPresell}</if>
+        <if test="storeNumber != null and storeNumber != ''">and T_STORE_NUMBER=#{storeNumber}</if>
+        <if test="themeName != null and themeName != ''">and SHOP_THEME_NAME=#{themeName}</if>
+        <if test="status != null and status != ''">and STATUS=#{status}</if>
+        <if test="shopClass != null and shopClass != ''">and SHOP_CLASS = #{shopClass}</if>
+        <if test="shopClasses != null and shopClasses != ''">and SHOP_CLASS != #{shopClasses}</if>
+        <if test="shopId != null and shopId != ''">and SHOP_ID=#{shopId}</if>
+        <if test="orderDateBegin != null and orderDateBegin != '' ">
+            and LAST_GROUNDING_TIME <![CDATA[ >= ]]>
+            #{orderDateBegin,jdbcType=VARCHAR}
+        </if>
+        <if test="orderDateEnd != null and orderDateEnd != '' ">
+            and LAST_GROUNDING_TIME <![CDATA[ <= ]]>
+            #{orderDateEnd,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+        select * from
+        <include refid="shop"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+        order by SHOP_ID desc
+    </select>
+
+    <select id="listPageCount" parameterType="java.util.Map"
+            resultType="long">
+        select count(1) from
+        <include refid="shop"/>
+        <where>
+            <include refid="condition_sql"/>
+        </where>
+    </select>
+
+    <select id="listbycityandtheme" parameterType="java.util.Map"
+            resultMap="beanMap">
+        select * from
+        <include refid="shop"/>
+        a,
+        <include refid="store"/>
+        b
+        <where>
+            a.T_STORE_NUMBER = b.STORE_NUMBER
+            and
+            b.CITY_NAME = #{city}
+            and
+            a.SHOP_THEME_NAME = #{theme}
+            and a.STATUS =#{status}
+        </where>
+    </select>
+
+    <select id="getShopByShopFarmTypeId" parameterType="java.util.Map" resultMap="beanMap">
+        SELECT * FROM
+        <include refid="shop"/>
+        a,
+        <include refid="shopFarm"/>
+        b
+        <where>
+            a.SHOP_ID = b.T_SHOP_ID
+            AND b.SHOP_FARM_TYPE_ID = #{shopFarmTypeId}
+            AND a.STATUS = 100
+        </where>
+    </select>
 </mapper>
